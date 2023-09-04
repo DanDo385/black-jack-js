@@ -1,4 +1,4 @@
-# This is the first in a series of builds of this Blackjack project.
+# This is the first in a series of builds of this Blackjack projects
 
 Since this the first projects in the series, I have a general vision of how I see the future of this projects progressing but will veer from this plan as necessary if I develop any ideas along the way that may warrant implementation:
 
@@ -12,7 +12,8 @@ Since this the first projects in the series, I have a general vision of how I se
 Many thanks to Kenny Ip for his inspiration to begin this fun little series and for letting me begin without worrying about creating images for an entire deck of cards! Original project details below. Given the minimal styling changes, the projects may appear similar, but as I develop these projects as stated above, in the end they will be very different.
 
 [Black Jack](https://youtu.be/bMYCWccL-3U)
-- Coding Tutorial: https://youtu.be/bMYCWccL-3U
-- Demo: https://imkennyyip.github.io/black-jack/
+
+- Coding Tutorial: <https://youtu.be/bMYCWccL-3U>
+- Demo: <https://imkennyyip.github.io/black-jack/>
 
 One consistent theme I have heard over and over again is to pick a game or topic that you find interesting. I have never dove too deep into the Blackjack waters, but have found the game, especially the card counting aspect, totally fascinating so I have no excuse not to make the most out of this little series.
