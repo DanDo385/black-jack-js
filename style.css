@@ -20,9 +20,8 @@ body {
     font-size: 6;
 }
 
-#stand-button {
+#stand-button button {
     width: 45px;
     height: 15px;
     font-size: 9%; 
 }
-
