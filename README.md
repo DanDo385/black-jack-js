@@ -17,3 +17,5 @@ Many thanks to Kenny Ip for his inspiration to begin this fun little series and 
 - Demo: <https://imkennyyip.github.io/black-jack/>
 
 One consistent theme I have heard over and over again is to pick a game or topic that you find interesting. I have never dove too deep into the Blackjack waters, but have found the game, especially the card counting aspect, totally fascinating so I have no excuse not to make the most out of this little series.
+
+Let's go...
