@@ -1,6 +1,5 @@
 body {
-    font-family: 'Ubuntu', sans-serif;
-    font-family: "Arial", sans-serif;
+    font-family: 'roboto', sans-serif;
     text-align: center;
     background-color: rgb(201, 237, 240);
 }
@@ -20,7 +19,7 @@ body {
     width: 99px;
     height: 60px;
     font-size: 15px;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
 #stand-button {
@@ -33,10 +32,10 @@ body {
 
 #double-button {
     background-color: orange;
-    width: 135px;
+    width: 99px;
     height: 60px;
     font-size: 15px; 
-    font-family: 'Ubuntu', sans-serif; 
+    font-family: 'Roboto', sans-serif; 
 }
 
 #split-button {
@@ -44,5 +43,5 @@ body {
     width: 99px;
     height: 60px;
     font-size: 15px; 
-    font-family: 'Arial', sans-serif;   
+    font-family: 'Ubuntu', sans-serif; 
 }
