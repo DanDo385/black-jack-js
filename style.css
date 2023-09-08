@@ -16,31 +16,31 @@ body {
 #hit-button {
     background-color: green;
     width: 75px;
-    height: 33px;
+    height: 60px;
     font-size: 15px;
-    font: jokerman;
+    font: Ubuntu;
 }
 
 #stand-button {
     background-color: red;
-    width: 75px; 
-    height: 33px;
+    width: 99px; 
+    height: 60px;
     font-size: 15px; 
-    font: Times New Roman    
+    font: Arial;  
 }
 
 #double-button {
     background-color: orange;
-    width: 75px;
-    height: 33px;
-    font-size: 9%; 
+    width: 150px;
+    height: 60px;
+    font-size: 15px; 
     font: Arial;    
 }
 
 #split-button {
     background-color: yellow;
-    width: 75px;
-    height: 33px;
-    font-size: 9%; 
-    font: typewriter;    
+    width: 99px;
+    height: 60px;
+    font-size: 15px; 
+    font: Arial;    
 }
