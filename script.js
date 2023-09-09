@@ -15,3 +15,16 @@ createDeck();
 
 console.log(deck);
 
+function shuffleDeck() {
+    for (let i = 0; i < deck.length; i++) {
+        const j = Math.floor(Math.random() * deck.length);
+        const temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
+}
+
+shuffleDeck();
+
+console,log(deck);
+

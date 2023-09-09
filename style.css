@@ -1,5 +1,5 @@
 body {
-    font-family: 'roboto', sans-serif;
+    font-family: 'Roboto Serif', serif;
     text-align: center;
     background-color: rgb(201, 237, 240);
 }
@@ -16,32 +16,36 @@ body {
 
 #hit-button {
     background-color: green;
-    width: 99px;
-    height: 60px;
+    width: 350px;
+    height: 51px;
     font-size: 15px;
     font-family: 'Arial', sans-serif;
 }
 
 #stand-button {
     background-color: red;
-    width: 99px; 
-    height: 60px;
+    width: 350px; 
+    height: 51px;
     font-size: 15px; 
     font-family: 'Arial', sans-serif;
 }
 
 #double-button {
     background-color: orange;
-    width: 99px;
-    height: 60px;
+    width: 350px;
+    height: 51px;
     font-size: 15px; 
     font-family: 'Roboto', sans-serif; 
 }
 
 #split-button {
     background-color: yellow;
-    width: 99px;
-    height: 60px;
+    width: 350px;
+    height: 51px;
     font-size: 15px; 
     font-family: 'Ubuntu', sans-serif; 
+}
+
+cheat-link {
+    font-family: 'Roboto Serif', serif;
 }
