@@ -16,32 +16,32 @@ body {
 
 #hit-button {
     background-color: green;
-    width: 350px;
-    height: 51px;
+    width: 222px;
+    height: 72px;
     font-size: 15px;
     font-family: 'Arial', sans-serif;
 }
 
 #stand-button {
     background-color: red;
-    width: 350px; 
-    height: 51px;
+    width: 222px; 
+    height: 72px;
     font-size: 15px; 
     font-family: 'Arial', sans-serif;
 }
 
 #double-button {
     background-color: orange;
-    width: 350px;
-    height: 51px;
+    width: 222px;
+    height: 72px;
     font-size: 15px; 
     font-family: 'Roboto', sans-serif; 
 }
 
 #split-button {
     background-color: yellow;
-    width: 350px;
-    height: 51px;
+    width: 222px;
+    height: 72px;
     font-size: 15px; 
     font-family: 'Ubuntu', sans-serif; 
 }
