@@ -1,7 +1,7 @@
 let deck = [];
 
 // create a deck of cards
-function createDeck() {
+function CreateDeck() {
     const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10','J', 'Q', 'K', 'A'];
     const suits = ['C', 'D', 'H', 'S'];
     
@@ -12,20 +12,25 @@ function createDeck() {
     }
 }
 
-createDeck();
+CreateDeck();
 
 console.log(deck);
 
-function shuffleDeck() {
+function shuffleDeck(deck) {
     for (let i = 0; i < deck.length; i++) {
-        const j = Math.floor(Math.random() * deck.length);
+        // pick a random card from the deck
+        const j = Math.floor(Math.random() * (i + 1));
+        
+        // swap the current card with the random card using a temporary variable
         const temp = deck[i];
         deck[i] = deck[j];
         deck[j] = temp;
     }
 }
 
-shuffleDeck();
+
+// shuffle the deck
+shuffleDeck(deck);
 
 console.log(deck);
 
