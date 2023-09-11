@@ -4,6 +4,10 @@ body {
     background-color: aqua
 }
 
+#game-container {
+    background-color: white;
+}
+
 #dealer-cards img {
     width: 124px;
     height: 189px;
