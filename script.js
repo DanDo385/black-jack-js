@@ -16,7 +16,7 @@ function CreateDeck() {
     }
 }
 
-CreateDeck();
+//CreateDeck();
 
 console.log(deck);
 
@@ -31,8 +31,9 @@ function ShuffleDeck(deck) {
     }
 }
 
+
 // shuffle the deck
-ShuffleDeck(deck);
+//ShuffleDeck(deck);
 
 console.log(deck);
 
