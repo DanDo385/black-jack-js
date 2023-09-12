@@ -16,7 +16,7 @@ function CreateDeck() {
     }
 }
 
-//CreateDeck();
+CreateDeck();
 
 console.log(deck);
 
@@ -24,16 +24,17 @@ function ShuffleDeck(deck) {
     for (let i = 0; i < deck.length; i++) {
         const j = Math.floor(Math.random() * (i + 1));
         console.log(j);
+        console.log(deck);
         const temp = deck[i];
         deck[i] = deck[j];
         deck[j] = temp;
-        console.log(temp);
+        console.log(deck);
     }
 }
 
 
 // shuffle the deck
-//ShuffleDeck(deck);
+ShuffleDeck(deck);
 
 console.log(deck);
 
