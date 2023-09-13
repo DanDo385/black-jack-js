@@ -6,6 +6,9 @@ body {
 
 #game-container {
     background-color: white;
+    width: 500px;
+    height: 700px;
+
 }
 
 #dealer-cards img {
@@ -20,36 +23,28 @@ body {
 
 #hit-button {
     background-color: green;
-    width: 222px;
-    height: 72px;
     font-size: 15px;
     font-family: 'Arial', sans-serif;
 }
 
 #stand-button {
     background-color: red;
-    width: 222px; 
-    height: 72px;
     font-size: 15px; 
     font-family: 'Arial', sans-serif;
 }
 
 #double-button {
     background-color: orange;
-    width: 222px;
-    height: 72px;
     font-size: 15px; 
     font-family: 'Roboto', sans-serif; 
 }
 
 #split-button {
     background-color: yellow;
-    width: 222px;
-    height: 72px;
     font-size: 15px; 
     font-family: 'Ubuntu', sans-serif; 
 }
 
-cheat-link {
+#cheat-link {
     font-family: 'Roboto Serif', serif;
 }
