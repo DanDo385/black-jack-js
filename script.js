@@ -21,7 +21,7 @@ CreateDeck();
 console.log(deck);
 
 function ShuffleDeck(deck) {
-    for (let i=deck.length; i>0; i--) {
+    for (let i=52; i>0; i--) {
         const j = Math.floor(Math.random() * deck.length-i);
         console.log(j);
         console.log(deck);
