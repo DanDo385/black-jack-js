@@ -21,9 +21,9 @@ CreateDeck();
 console.log(deck);
 
 function ShuffleDeck(deck) {
-    for (let i = 0; i > deck.length-1; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        console.log(j);
+    for (let i = 0; i < deck.length; i++) {
+        const j = Math.floor(Math.random() * (deck.length));
+        console.log(j)
         console.log(deck);
         const temp = deck[i];
         deck[i] = deck[j];
