@@ -21,14 +21,12 @@ CreateDeck();
 console.log(deck);
 
 function ShuffleDeck(deck) {
-    for (let i = 0; i < deck.length; i++) {
-        const j = Math.floor(Math.random() * (deck.length));
-        console.log(j)
+    for (let i=0; i<deck.length; i++) {
+        const j = Math.floor(Math.random() * deck.length-i);
         console.log(deck);
-        const temp = deck[i];
+        
+        console.log(j);
         deck[i] = deck[j];
-        deck[j] = temp;
-        console.log(deck);
     }
 }
 
