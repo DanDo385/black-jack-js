@@ -1,5 +1,13 @@
 let deck = [];
 // create a deck of cards
+
+var dealerSum = 0;
+var playerSum = 0;
+
+var hidden
+
+
+
 function CreateDeck() {
     const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10','J', 'Q', 'K', 'A'];
     const suits = ['C', 'D', 'H', 'S'];

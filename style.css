@@ -45,6 +45,12 @@ body {
     font-family: 'Ubuntu', sans-serif; 
 }
 
+#insurance-button {
+    background-color: blue;
+    font-size: 15px; 
+    font-family: 'Roboto', sans-serif; 
+}
+
 #cheat-link {
     font-family: 'Roboto Serif', serif;
 }
