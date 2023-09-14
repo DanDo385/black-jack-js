@@ -58,5 +58,12 @@ function initialDeal() {
 }
 
 function updateGame() {
+    //update player's hand
     const dealerCardsElement = document.getElementById('dealer-cards');
+    dealerCardsElement.innerHTML = ''; 
+    for (const card of dealerHand) {
+        const cardImage.textContent = 
+    }
+
+
 }
