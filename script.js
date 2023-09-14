@@ -1,14 +1,20 @@
 let deck = [];
 // create a deck of cards
 
-var dealerSum = 0;
-var playerSum = 0;
+let dealerScore = 0;
+let playerScore = 0;
 
-var hidden
+let dealerHand = [];
+let playerHand = [];
+
+let gameOver = false;
 
 
 
-function CreateDeck() {
+
+
+
+function createDeck() {
     const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10','J', 'Q', 'K', 'A'];
     const suits = ['C', 'D', 'H', 'S'];
     
@@ -19,23 +25,27 @@ function CreateDeck() {
     }
 }
 
-CreateDeck();
+createDeck();
 
 console.log(deck);
 
-function ShuffleDeck(deck) {
+function shuffleDeck(deck) {
     for (let i=0; i < deck.length; i++) {
         const j = Math.floor(Math.random() * deck.length);
         console.log(j);
         console.log(deck);
-        const temp = deck[i];  
-        deck[i] = deck[j];
-        deck[j] = temp;
+        [deck[i], deck[j]] = [deck[j], deck[i]];
     }
+
 }
 
 // shuffle the deck
-ShuffleDeck(deck)
+shuffleDeck(deck)
 
 console.log(deck);
+
+function dealCard() {
+    const card = deck.pop;
+    return card;
+}
 
