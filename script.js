@@ -36,7 +36,6 @@ function shuffleDeck(deck) {
         console.log(deck);
         [deck[i], deck[j]] = [deck[j], deck[i]];
     }
-
 }
 
 // shuffle the deck
@@ -44,8 +43,20 @@ shuffleDeck(deck)
 
 console.log(deck);
 
-function dealCard() {
+// not sure if deck needs to be passed in as an argument
+function dealCard(deck) {
     const card = deck.pop;
     return card;
 }
 
+function initialDeal() {
+    for (let i=0; i < 2; i++) {
+        dealerHand.push(dealCard(deck));
+        playerHand.push(dealCard(deck));
+    }
+    updateGame()
+}
+
+function updateGame() {
+    const dealerCardsElement = document.getElementById('dealer-cards');
+}
