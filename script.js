@@ -92,6 +92,6 @@ for (const card of hand) {
 
 // If the score is greater than 21 and there are aces, set some/all of them to 1
 
-while (score > 21 && aceCount > 0) {
+while (aceCount>0 && score>21) {
     
 }
