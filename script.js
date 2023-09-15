@@ -1,4 +1,4 @@
-let deck = [];
+tlet deck = [];
 // create a deck of cards
 
 let dealerScore = 0;
@@ -59,11 +59,18 @@ function initialDeal() {
 
 function updateGame() {
     //update player's hand
+    const playerCardsElement = document.getElementById('player-cards');
+        playerCardsElement.innerHTML = '';
+        for (const card of playerHand) {
+            const cardImage = document.createElement('img');
+            cardImage.src = `assets/images/cards/${card}.png`;
+            playerCardsElement.appendChild(cardImage);
+        }
+    
     const dealerCardsElement = document.getElementById('dealer-cards');
-    dealerCardsElement.innerHTML = ''; 
-    for (const card of dealerHand) {
+        dealerCardsElement.innerHTML = ''; 
+    
+        for (const card of dealerHand) {
         const cardImage.textContent = 
-    }
-
-
+        }   
 }
