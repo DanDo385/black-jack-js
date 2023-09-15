@@ -78,22 +78,20 @@ function updateGame() {
         }   
 }
 
-function calculateScore(hand) {
-    let score = 0;
-    let aceCount = 0;
-
-    for (const card of hand) {
-        const value = card.charAt(0)
-        if (value === 'A') {
-            aceCount++;
-            score += 11;
-        }
+for (const card of hand) {
+    const value = card.charAt(0);
+    if (value === 'A') {
+        aceCount++;
+        score += 11; // Assume Ace as 11 initially
+    } else if (value === 'K' || value === 'Q' || value === 'J') {
+        score += 10; // Face cards are worth 10 points
+    } else {
+        score += parseInt(value); // Other cards are worth their face value
     }
-    else if (value === 'K' || value === 'Q' || value === 'J') {
-        score += 10;
-    }
-    else {
-        score += value;
-    }        
+}
 
+// If the score is greater than 21 and there are aces, set some/all of them to 1
+
+while (score > 21 && aceCount > 0) {
+    
 }
