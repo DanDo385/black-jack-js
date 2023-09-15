@@ -1,11 +1,14 @@
-let deck = [];
 // create a deck of cards
+let deck = [];
 
+// set dealer and player scores to 0
 let dealerScore = 0;
 let playerScore = 0;
 
+// set playerHand and dealerHand equal to empty arrays
 let dealerHand = [];
 let playerHand = [];
+
 
 let gameOver = false;
 
@@ -26,7 +29,7 @@ createDeck();
 console.log(deck);
 
 function shuffleDeck(deck) {
-    for (let i=0; i < deck.length; i++) {
+    for (let i = 0; i < deck.length; i++) {
         const j = Math.floor(Math.random() * deck.length);
         [deck[i], deck[j]] = [deck[j], deck[i]];
     }
@@ -43,12 +46,14 @@ function dealCard(deck) {
 
 // create function to deal initial hand
 function initialDeal() {
-    for (let i=0; i<2; i++) {
+    for (let i = 0; i < 2; i++) {
         dealerHand.push(dealCard(deck));
         playerHand.push(dealCard(deck));
     }
     updateGame()
 }
+
+
 
 
 function updateGame() {
@@ -87,5 +92,16 @@ function updateGame() {
         aceCount--;
     }
 
-    if
+    if (hand === playerHand) {
+        playerScore = score;
+        }
+    else if (hand === dealerHand) {
+        dealerScore = score;
+        }
+
+    function determineWinner() {
+        if (playerScore 
+    }
+    
 }
+
