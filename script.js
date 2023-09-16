@@ -112,6 +112,21 @@ function stand() {
 }
 
 function determineWinner() {
-    let result = '';
-    
+    let result = 0;
+    let message = '';
+
+    switch(true) {
+        case (playerScore === 21);
+            result = 1;
+            message = 'BlackJack! Player wins!';
+            break;
+        case (playerScore > 21);
+            result = 2;
+            message = 'Player busts! Dealer wins!';
+        case (playerScore === 21 && playerHand.length === 2);
+            result = 'Player Wins with BlackJack!';
+            break;
+        case (playerScore != 21 && playerHand.length === 2 && dealerScore === 21);
+            result
+    }
 }
