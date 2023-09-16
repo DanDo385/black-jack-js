@@ -107,8 +107,9 @@ function hit() {
 function stand() {
     if (dealerScore < 17) {
         dealerHand.push(dealCard(deck));
-    }
+        }
     updateGame();
+    }
 }
 
 function determineWinner() {
@@ -116,17 +117,38 @@ function determineWinner() {
     let message = '';
 
     switch(true) {
-        case (playerScore === 21);
+        case (playerScore === 21):
             result = 1;
             message = 'BlackJack! Player wins!';
             break;
-        case (playerScore > 21);
+        case (playerScore > 21):
             result = 2;
             message = 'Player busts! Dealer wins!';
-        case (playerScore === 21 && playerHand.length === 2);
-            result = 'Player Wins with BlackJack!';
             break;
-        case (playerScore != 21 && playerHand.length === 2 && dealerScore === 21);
-            result
+        case (playerScore === 21 && playerHand.length === 2):
+            result = 1;
+            message = 'Player Wins with BlackJack!';
+            break;
+        case (playerScore != 21 && playerHand.length === 2 && dealerScore === 21 && dealerHand.length === 2):
+            result = 2;
+            message = 'Dealer wins with BlackJack!';
+            break;
+        case (playerScore != 21 && dealerScore > 21):
+            result = 1;
+            message = 'Dealer busts! Player wins!';
+            break;
+        case (playerScore > dealerScore):
+            result = 1;
+            message = 'Player wins!';
+            break;
+        case (playerScore < dealerScore):
+            result = 2;
+            message = 'Dealer wins!';
+            break;
+        case (playerScore === dealerScore):
+            result = 0;
+            message = 'Push!';
+            break;
     }
+    alert(message);
 }
