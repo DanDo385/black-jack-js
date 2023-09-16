@@ -9,8 +9,19 @@ let playerScore = 0;
 let dealerHand = [];
 let playerHand = [];
 
-
 let gameOver = false;
+
+// Add event listeners to the hit and stand buttons
+const hitButton = document.getElementById('hit-button');
+const standButton = document.getElementById('stand-button');
+
+hitButton.addEventListener('click', function() {
+    hit(); // Call the hit() function when the hit button is clicked
+});
+
+standButton.addEventListener('click', function() {
+    stand(); // Call the stand() function when the stand button is clicked
+});
 
 function createDeck() {
     const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10','J', 'Q', 'K', 'A'];
@@ -25,8 +36,6 @@ function createDeck() {
 
 //run CreateDeck function
 createDeck();
-
-console.log(deck);
 
 function shuffleDeck(deck) {
     for (let i = 0; i < deck.length; i++) {
@@ -52,9 +61,6 @@ function initialDeal() {
     }
     updateGame()
 }
-
-
-
 
 function updateGame() {
     //update player's hand
@@ -91,13 +97,21 @@ function updateGame() {
         score -= 10; // Converts 11 to 1 by subtracting 10 from the score
         aceCount--;
     }
-
+    // Set scores to player and dealer hands, respectively
     if (hand === playerHand) {
         playerScore = score;
         }
     else if (hand === dealerHand) {
         dealerScore = score;
         }
+
+function deal() {
+    createDeck();
+    shuffleDeck(deck);
+    initialDeal();
+    updateGame();
+    
+}
 
 function hit() {
     playerHard.push(dealCard(deck));
@@ -151,4 +165,6 @@ function determineWinner() {
             break;
     }
     alert(message);
-}
+    console.log(message);
+    gameOver = true;
+} 
