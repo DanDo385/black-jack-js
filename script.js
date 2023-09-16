@@ -99,9 +99,19 @@ function updateGame() {
         dealerScore = score;
         }
 
-    function determineWinner() {
-        if (playerScore 
-    }
-    
+function hit() {
+    playerHard.push(dealCard(deck));
+    updateGame();
 }
 
+function stand() {
+    if (dealerScore < 17) {
+        dealerHand.push(dealCard(deck));
+    }
+    updateGame();
+}
+
+function determineWinner() {
+    let result = '';
+    
+}
