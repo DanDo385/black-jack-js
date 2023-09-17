@@ -20,7 +20,8 @@ hitButton.addEventListener('click', function() {
 });
 
 standButton.addEventListener('click', function() {
-    stand(); // Call the stand() function when the stand button is clicked
+    stand();
+     // Call the stand() function when the stand button is clicked
 });
 
 function createDeck() {
@@ -110,7 +111,7 @@ function deal() {
     shuffleDeck(deck);
     initialDeal();
     updateGame();
-    
+
 }
 
 function hit() {
@@ -123,48 +124,55 @@ function stand() {
         dealerHand.push(dealCard(deck));
         }
     updateGame();
+    endGame();
+    determineWinner();
     }
 }
 
+// function to determine winner
 function determineWinner() {
+
+    // declare variable result with value of 0
     let result = 0;
+
+    // declare variable message with value of empty string
     let message = '';
 
-    switch(true) {
-        case (playerScore === 21):
+    function determineWinner() {
+        let result = 0;
+        let message = '';
+    
+        if (playerScore === 21) {
             result = 1;
             message = 'BlackJack! Player wins!';
-            break;
-        case (playerScore > 21):
+        } else if (playerScore > 21) {
             result = 2;
             message = 'Player busts! Dealer wins!';
-            break;
-        case (playerScore === 21 && playerHand.length === 2):
+        } else if (playerScore === 21 && playerHand.length === 2) {
             result = 1;
             message = 'Player Wins with BlackJack!';
-            break;
-        case (playerScore != 21 && playerHand.length === 2 && dealerScore === 21 && dealerHand.length === 2):
+        } else if (playerScore != 21 && playerHand.length === 2 && dealerScore === 21 && dealerHand.length === 2) {
             result = 2;
             message = 'Dealer wins with BlackJack!';
-            break;
-        case (playerScore != 21 && dealerScore > 21):
+        } else if (playerScore != 21 && dealerScore > 21) {
             result = 1;
             message = 'Dealer busts! Player wins!';
-            break;
-        case (playerScore > dealerScore):
+        } else if (playerScore > dealerScore) {
             result = 1;
             message = 'Player wins!';
-            break;
-        case (playerScore < dealerScore):
+        } else if (playerScore < dealerScore) {
             result = 2;
             message = 'Dealer wins!';
-            break;
-        case (playerScore === dealerScore):
+        } else if (playerScore === dealerScore) {
             result = 0;
             message = 'Push!';
-            break;
+        }
+    
+        alert(message);
+        console.log(message);
+        gameOver = true;
     }
+    
+    // alert message
     alert(message);
-    console.log(message);
-    gameOver = true;
-} 
+}
