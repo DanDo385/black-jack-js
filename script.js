@@ -62,6 +62,11 @@ function initialDeal() {
     }
     updateGame()
 }
+function updateCardImages(hand, elementId) {
+    const cardsElement = document.getElementById(elementId);
+        cards.innerHTML = '';
+        
+
 
 function updateGame() {
     //update player's hand
@@ -111,6 +116,7 @@ function deal() {
     shuffleDeck(deck);
     initialDeal();
     updateGame();
+    updateCardImages();
 
 }
 
@@ -142,6 +148,7 @@ function determineWinner() {
         let result = 0;
         let message = '';
     
+        // Use If/Else statements to determine winner
         if (playerScore === 21) {
             result = 1;
             message = 'BlackJack! Player wins!';
