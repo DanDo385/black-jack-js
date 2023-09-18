@@ -1,25 +1,22 @@
-// create a deck of cards
+// Initialize the deck of cards and other variables
 let deck = [];
-let hand = [];
-
-let score = 0;
-let aceCount = 0;
-
-
-// set dealer and player scores to 0
-let dealerScore = 0;
-let playerScore= 0;
-
-// set playerHand and dealerHand equal to empty arrays
-let dealerHand = [];
 let playerHand = [];
-
+let dealerHand = [];
+let playerScore = 0;
+let dealerScore = 0;
 let gameOver = false;
 
-window.onload = function() {
-    setStart(); 
-}
+// Initialize ace counts for player and dealer
+let playerAceCount = 0;
+let dealerAceCount = 0;
 
+// Initialize score and result message
+let result = 0;
+let message = '';
+
+window.onload = function() {
+    setStart();
+}
 
 // Add event listeners to the deal, hit, and stand button
 const dealButton = document.getElementById('deal-button');
@@ -63,14 +60,13 @@ function shuffleDeck(deck) {
     [deck[i], deck[j]] = [deck[j], deck[i]];
     }
 }
-
+//set starting board
 function setStart() {
     playerHand = ["BACK","BACK"];
     dealerHand = ["BACK",];
     updateDealerCardImages();
     updatePlayerCardImages();
-}
-
+    updateGame();
 // create function to deal initial hand
 function initialDeal() {
         for (let i = 0; i < 2; i++) {
@@ -166,11 +162,9 @@ function stand() {
 
 // function to determine winner
 function determineWinner() {
-
     // declare variable result with value of 0
     let result = 0;
-
-    // declare variable message with value of empty string
+     // declare variable message with value of empty string
     let message = '';
 
     function determineWinner() {
@@ -212,4 +206,4 @@ function determineWinner() {
     // alert message
     alert(message);
     }
-
+}
