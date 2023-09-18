@@ -1,5 +1,10 @@
 // create a deck of cards
 let deck = [];
+let hand = [];
+
+let score = 0;
+let aceCount = 0;
+
 
 // set dealer and player scores to 0
 let dealerScore = 0;
@@ -58,9 +63,10 @@ function shuffleDeck(deck) {
 }
 
 function setStart() {
-    payerHand = BACK;
-    dealerHand = BACK;
-    updateCardImages();
+    playerHand = ["BACK","BACK"];
+    dealerHand = ["BACK",];
+    updateDealerCardImages();
+    updatePlayerCardImages();
 }
 
 // create function to deal initial hand
@@ -70,16 +76,30 @@ function initialDeal() {
             playerHand.push(dealCard(deck));
         }
         updateGame()
+        console.log(dealerHand);
 }
 
-function updateCardImages(hand, elementId) {
-    const cardsElement = document.getElementById(elementId);
-        cards.innerHTML = '';
-        for (const card of hard) {
-            cardImage.src=`assets/images/cards/${card}.png`;
-            cardImage.alt = card;
-            cardsElement.appendChild(cardImage)
-        }
+function updateDealerCardImages() {
+    const cardsElement = document.getElementById('dealer-cards');
+    cardsElement.innerHTML = '';
+    for (const card of dealerHand) {
+        const cardImage = document.createElement('img');
+        cardImage.src = `assets/images/cards/${card}.png`;
+        cardImage.alt = card;
+        cardsElement.appendChild(cardImage);
+    }
+}
+
+function updatePlayerCardImages() {
+    const cardsElement = document.getElementById('player-cards');
+    cardsElement.innerHTML = '';
+    for (const card of playerHand) {
+        const cardImage = document.createElement('img');
+        cardImage.src = `assets/images/cards/${card}.png`;
+        cardImage.alt = card;
+        cardsElement.appendChild(cardImage);
+    }
+}
 
 function updateGame() {
     //update player's hand
@@ -147,7 +167,6 @@ function stand() {
     updateGame();
     endGame();
     determineWinner();
-    }
 }
 
 // function to determine winner

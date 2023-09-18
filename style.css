@@ -1,7 +1,7 @@
 body {
     font-family: 'Roboto Serif', serif;
     text-align: center;
-    background-color: aqua
+    background-color: green
 }
 
 #game-container {
@@ -22,19 +22,19 @@ body {
 }
 
 #hit-button {
-    background-color: green;
+    background-color: orange;
     font-size: 15px;
     font-family: 'Arial', sans-serif;
 }
 
 #stand-button {
-    background-color: red;
+    background-color: yellow;
     font-size: 15px; 
     font-family: 'Arial', sans-serif;
 }
 
 #double-button {
-    background-color: orange;
+    background-color: blue;
     font-size: 15px; 
     font-family: 'Roboto', sans-serif; 
 }
