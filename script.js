@@ -8,7 +8,7 @@ let aceCount = 0;
 
 // set dealer and player scores to 0
 let dealerScore = 0;
-let playerScore = 0;
+let playerScore= 0;
 
 // set playerHand and dealerHand equal to empty arrays
 let dealerHand = [];
@@ -30,7 +30,9 @@ dealButton.addEventListener('click', function() {
     createDeck();
     shuffleDeck(deck);
     initialDeal();
-     
+    updateGame();
+    updateDealerCardImages();
+    updatePlayerCardImages();
 });
 
 hitButton.addEventListener('click', function() {
@@ -128,7 +130,6 @@ function updateGame() {
         score += 10; // Face cards are worth 10 points
         } else {
         score += parseInt(value); // Other cards are worth their face value
-        
         }
     }
 }   
@@ -146,18 +147,12 @@ function updateGame() {
         dealerScore = score;
         }
 
-    function deal() {
-        createDeck();
-        shuffleDeck(deck);
-        initialDeal();
-        updateGame();
-        updateCardImages();
+    
 
-    }
-
-    function hit() {
-        playerHard.push(dealCard(deck));
-        updateGame();
+function hit() {
+    playerHand.push(dealCard(deck));
+    updateGame();
+    updatePlayerCardImages()
     }
 
 function stand() {
@@ -165,7 +160,7 @@ function stand() {
         dealerHand.push(dealCard(deck));
         }
     updateGame();
-    endGame();
+    updateDealerCardImages();
     determineWinner();
 }
 
