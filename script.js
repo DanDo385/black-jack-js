@@ -11,8 +11,13 @@ let playerHand = [];
 
 let gameOver = false;
 
-// Add event listeners to the deal, hit, and stand buttons
-const dealButton = docuement.getElementById('deal-button');
+window.onload = function() {
+    setStart(); 
+}
+
+
+// Add event listeners to the deal, hit, and stand button
+const dealButton = document.getElementById('deal-button');
 const hitButton = document.getElementById('hit-button');
 const standButton = document.getElementById('stand-button');
 
@@ -20,8 +25,8 @@ dealButton.addEventListener('click', function() {
     createDeck();
     shuffleDeck(deck);
     initialDeal();
-     // Call the stand() function when the stand button is clicked
-}
+     
+});
 
 hitButton.addEventListener('click', function() {
     hit(); // Call the hit() function when the hit button is clicked
@@ -52,7 +57,11 @@ function shuffleDeck(deck) {
     }
 }
 
-
+function setStart() {
+    payerHand = BACK;
+    dealerHand = BACK;
+    updateCardImages();
+}
 
 // create function to deal initial hand
 function initialDeal() {
