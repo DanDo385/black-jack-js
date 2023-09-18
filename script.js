@@ -165,7 +165,7 @@ function determineWinner() {
             message = 'Dealer wins!';
         } else if (playerScore === dealerScore) {
             result = 0;
-            message = 'Push!';
+            message = 'Push! Tie!';
         }
     
         alert(message);
