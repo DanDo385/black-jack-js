@@ -14,6 +14,9 @@ let dealerAceCount = 0;
 let result = 0;
 let message = '';
 
+let hand = [];
+let score = 0;
+
 window.onload = function() {
     setStart();
 }
@@ -117,7 +120,7 @@ function updateGame() {
             dealerCardsElement.appendChild(cardImage);
         }   
     //assign values to cards    
-    for (const card of hand) {
+    for (const card of dealerHand) {
         const value = card.charAt(0);
         if (value === 'A') {
         aceCount++;
@@ -131,79 +134,57 @@ function updateGame() {
 }   
 
     // If score>21 and there are aces, adjust ace value(s) to 1 from 11
-    while (score > 21 && aceCount > 0) {
-        score -= 10; // Converts 11 to 1 by subtracting 10 from the score
-        aceCount--;
-    }
+while (score > 21 && aceCount > 0) {
+    score -= 10; // Converts 11 to 1 by subtracting 10 from the score
+    aceCount-- }
+ 
     // Set scores to player and dealer hands, respectively
-    if (hand === playerHand) {
-        playerScore = score;
-        }
-    else if (hand === dealerHand) {
-        dealerScore = score;
-        }
-
-    
+if (hand === playerHand) 
+    { playerScore = score }
+else if (hand === dealerHand) {
+    dealerScore = score }
 
 function hit() {
     playerHand.push(dealCard(deck));
     updateGame();
     updatePlayerCardImages()
-    }
+}
 
 function stand() {
     if (dealerScore < 17) {
         dealerHand.push(dealCard(deck));
-        }
-    updateGame();
-    updateDealerCardImages();
+        updateGame();
+        updateDealerCardImages();
+    }
     determineWinner();
 }
 
 // function to determine winner
 function determineWinner() {
-    // declare variable result with value of 0
-    let result = 0;
-     // declare variable message with value of empty string
-    let message = '';
+    if (playerScore === 21) {
+        result = 1;
+        message = 'BlackJack! Player wins!';
+    } else if (playerScore > 21) {
+        result = 2;
+        message = 'Player busts! Dealer wins!';
+    } else if (dealerScore === 21) {
+        result = 2;
+        message = 'Dealer wins with BlackJack!';
+    } else if (dealerScore > 21) {
+        result = 1;
+        message = 'Dealer busts! Player wins!';
+    } else if (playerScore > dealerScore) {
+        result = 1;
+        message = 'Player wins!';
+    } else if (playerScore < dealerScore) {
+        result = 2;
+        message = 'Dealer wins!';
+    } else {
+        result = 0;
+        message = 'Push! Tie!';
+    }
 
-    function determineWinner() {
-        let result = 0;
-        let message = '';
-    
-        // Use If/Else statements to determine winner
-        if (playerScore === 21) {
-            result = 1;
-            message = 'BlackJack! Player wins!';
-        } else if (playerScore > 21) {
-            result = 2;
-            message = 'Player busts! Dealer wins!';
-        } else if (playerScore === 21 && playerHand.length === 2) {
-            result = 1;
-            message = 'Player Wins with BlackJack!';
-        } else if (playerScore != 21 && playerHand.length === 2 && dealerScore === 21 && dealerHand.length === 2) {
-            result = 2;
-            message = 'Dealer wins with BlackJack!';
-        } else if (playerScore != 21 && dealerScore > 21) {
-            result = 1;
-            message = 'Dealer busts! Player wins!';
-        } else if (playerScore > dealerScore) {
-            result = 1;
-            message = 'Player wins!';
-        } else if (playerScore < dealerScore) {
-            result = 2;
-            message = 'Dealer wins!';
-        } else if (playerScore === dealerScore) {
-            result = 0;
-            message = 'Push! Tie!';
-        }
-    
-        alert(message);
-        console.log(message);
-        gameOver = true;
-    }
-    
-    // alert message
     alert(message);
-    }
+    gameOver = true;
+}
 }
