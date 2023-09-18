@@ -11,9 +11,17 @@ let playerHand = [];
 
 let gameOver = false;
 
-// Add event listeners to the hit and stand buttons
+// Add event listeners to the deal, hit, and stand buttons
+const dealButton = docuement.getElementById('deal-button');
 const hitButton = document.getElementById('hit-button');
 const standButton = document.getElementById('stand-button');
+
+dealButton.addEventListener('click', function() {
+    createDeck();
+    shuffleDeck(deck);
+    initialDeal();
+     // Call the stand() function when the stand button is clicked
+}
 
 hitButton.addEventListener('click', function() {
     hit(); // Call the hit() function when the hit button is clicked
@@ -35,38 +43,34 @@ function createDeck() {
     }
 }
 
-//run CreateDeck function
-createDeck();
-
+//shuffles deck by uniquely swapping out each card with a random card from 
+//the deck rather than just picking a random card from the desk and risk getting multiple same cards
 function shuffleDeck(deck) {
     for (let i = 0; i < deck.length; i++) {
-        const j = Math.floor(Math.random() * deck.length);
-        [deck[i], deck[j]] = [deck[j], deck[i]];
+    const j = Math.floor(Math.random() * deck.length);
+    [deck[i], deck[j]] = [deck[j], deck[i]];
     }
 }
 
-// shuffle the deck
-shuffleDeck(deck)
 
-// create function to deal from the deck
-function dealCard(deck) {
-    const card = deck.pop;
-    return card;
-}
 
 // create function to deal initial hand
 function initialDeal() {
-    for (let i = 0; i < 2; i++) {
-        dealerHand.push(dealCard(deck));
-        playerHand.push(dealCard(deck));
-    }
-    updateGame()
+        for (let i = 0; i < 2; i++) {
+            dealerHand.push(dealCard(deck));
+            playerHand.push(dealCard(deck));
+        }
+        updateGame()
 }
+
 function updateCardImages(hand, elementId) {
     const cardsElement = document.getElementById(elementId);
         cards.innerHTML = '';
-        
-
+        for (const card of hard) {
+            cardImage.src=`assets/images/cards/${card}.png`;
+            cardImage.alt = card;
+            cardsElement.appendChild(cardImage)
+        }
 
 function updateGame() {
     //update player's hand
@@ -95,8 +99,10 @@ function updateGame() {
         score += 10; // Face cards are worth 10 points
         } else {
         score += parseInt(value); // Other cards are worth their face value
+        
         }
-    }   
+    }
+}   
 
     // If score>21 and there are aces, adjust ace value(s) to 1 from 11
     while (score > 21 && aceCount > 0) {
@@ -111,19 +117,19 @@ function updateGame() {
         dealerScore = score;
         }
 
-function deal() {
-    createDeck();
-    shuffleDeck(deck);
-    initialDeal();
-    updateGame();
-    updateCardImages();
+    function deal() {
+        createDeck();
+        shuffleDeck(deck);
+        initialDeal();
+        updateGame();
+        updateCardImages();
 
-}
+    }
 
-function hit() {
-    playerHard.push(dealCard(deck));
-    updateGame();
-}
+    function hit() {
+        playerHard.push(dealCard(deck));
+        updateGame();
+    }
 
 function stand() {
     if (dealerScore < 17) {
@@ -182,4 +188,5 @@ function determineWinner() {
     
     // alert message
     alert(message);
-}
+    }
+
