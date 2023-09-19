@@ -63,6 +63,7 @@ function shuffleDeck(deck) {
     [deck[i], deck[j]] = [deck[j], deck[i]];
     }
 }
+
 //set starting board
 function setStart() {
     playerHand = ["BACK","BACK"];
@@ -70,7 +71,8 @@ function setStart() {
     updateDealerCardImages();
     updatePlayerCardImages();
     updateGame();
-// create function to deal initial hand
+
+    // create function to deal initial hand
 function initialDeal() {
         for (let i = 0; i < 2; i++) {
             dealerHand.push(dealCard(deck));
@@ -131,18 +133,27 @@ function updateGame() {
         score += parseInt(value); // Other cards are worth their face value
         }
     }
+    for (const card of playerHand) {
+        const value = card.charAt(0);
+        if (value === 'A') {
+        aceCount++;
+        score += 11; // Assume Ace as 11 initially
+        } else if (value === 'K' || value === 'Q' || value === 'J') {
+        score += 10; // Face cards are worth 10 points
+        } else {
+        score += parseInt(value); // Other cards are worth their face value
+        }
+    }
 }   
 
     // If score>21 and there are aces, adjust ace value(s) to 1 from 11
-while (score > 21 && aceCount > 0) {
-    score -= 10; // Converts 11 to 1 by subtracting 10 from the score
-    aceCount-- }
- 
-    // Set scores to player and dealer hands, respectively
-if (hand === playerHand) 
-    { playerScore = score }
-else if (hand === dealerHand) {
-    dealerScore = score }
+while (dealerScore > 21 && dealerAceCount > 0) {
+    dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
+    dealerAceCount-- }
+
+    while (playerScore > 21 && aceCount > 0) {
+        dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
+        dealerAceCount-- }
 
 function hit() {
     playerHand.push(dealCard(deck));
@@ -161,30 +172,20 @@ function stand() {
 
 // function to determine winner
 function determineWinner() {
-    if (playerScore === 21) {
-        result = 1;
-        message = 'BlackJack! Player wins!';
-    } else if (playerScore > 21) {
-        result = 2;
-        message = 'Player busts! Dealer wins!';
-    } else if (dealerScore === 21) {
-        result = 2;
-        message = 'Dealer wins with BlackJack!';
-    } else if (dealerScore > 21) {
-        result = 1;
-        message = 'Dealer busts! Player wins!';
-    } else if (playerScore > dealerScore) {
-        result = 1;
-        message = 'Player wins!';
-    } else if (playerScore < dealerScore) {
-        result = 2;
-        message = 'Dealer wins!';
-    } else {
-        result = 0;
-        message = 'Push! Tie!';
+    if (playerScore === 21) {result = 1; message = 'BlackJack! Player wins!'}
+    else if (playerScore > 21) {result = 2; message = 'Player busts! Dealer wins!'} 
+    else if (dealerScore === 21) {result = 2; message = 'Dealer wins with BlackJack!'} 
+    else if (dealerScore > 21) {result = 1; message = 'Dealer busts! Player wins!'} 
+    else if (playerScore > dealerScore) {result = 1;message = 'Player wins!'} 
+    else if (playerScore < dealerScore) {result = 2;message = 'Dealer wins!'} 
+    else {result = 0; message = 'Push! Tie!';
     }
 
     alert(message);
     gameOver = true;
+
+    if (result === 1 ){ "Player wins MFuh!" }
+    else if (result === 2) { "Dealer wins MFuh!" }
+    else { "Push! Tie!" }   
 }
 }
