@@ -150,7 +150,7 @@ function stand() {
 // function to determine winner
 function determineWinner() {
     if (playerScore === 21) { result = 1; message = 'BlackJack! Player wins!' }
-    else if (playerScore > 21) {r esult = 2; message = 'Player busts! Dealer wins!' } 
+    else if (playerScore > 21) {result = 2; message = 'Player busts! Dealer wins!' } 
     else if (dealerScore === 21) { result = 2; message = 'Dealer wins with BlackJack!' } 
     else if (dealerScore > 21) { result = 1; message = 'Dealer busts! Player wins!' } 
     else if (playerScore > dealerScore) { result = 1; message = 'Player wins!' } 
@@ -160,4 +160,5 @@ function determineWinner() {
     if (result === 1 ){ "Player wins MFuh!" }
     else if (result === 2) { "Dealer wins MFuh!" }
     else { "Push! Tie! You're both losers!"  }
-    console.log(message);}
+    console.log(message);
+}
