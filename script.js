@@ -68,16 +68,14 @@ function setStart() {
     // create function to deal initial hand
 function deal() {
         for (let i = 0; i < 2; i++) {
-            dealerHand.empty;
-            playerHand.empty;
-            dealerHand.push(deck[(deck.length-2)]); // Push the 2nd to last card in the deck to dealerHand
-            playerHand.push(deck[(deck.length-1)]); // Push the last card in the deck to playerHand
+           dealerHand.push(deck[(deck.length-2)]); // Push the 2nd to last card in the deck to dealerHand
+           playerHand.push(deck[(deck.length-1)]); // Push the last card in the deck to playerHand
         }
-        updateDealerCardImages();
-        updatePlayerCardImages();
-        calcScores();
         document.getElementById('dealer-score').innerHTML = dealerScore;
         document.getElementById('player-score').innerHTML = playerScore;
+        updateDealerCardImages();
+        updatePlayerCardImages();
+        calcScores();   
 }
 
 function updateDealerCardImages() {
