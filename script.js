@@ -9,7 +9,6 @@ let gameOver = false;
 // Initialize ace counts for dealer and player
 let playerAceCount = 0;
 
-
 // Initialize score and result message
 let result = 0;
 let message = '';
@@ -56,39 +55,38 @@ function shuffleDeck(deck) {
 
 //set starting board
 function setStart() {
+    createDeck();
+    shuffleDeck(deck);
     playerHand = ["BACK"];
     dealerHand = ["BACK"];
     updateDealerCardImages();
     updatePlayerCardImages();
     document.getElementById('dealer-score').innerHTML = '0';
     document.getElementById('player-score').innerHTML = '0';
+    calcScores();
 }
 
     // create function to deal initial hand
 function deal() {
-        createDeck();
-        shuffleDeck(deck);
         for (let i = 0; i < 2; i++) {
-            dealerHand.push(deck[1]); // Push the 2nd to last card in the deck to dealerHand
-            playerHand.push(deck[0]); // Push the last card in the deck to playerHand
-            deck.pop(); // Remove the last card from the deck
+            dealerHand.push(deck[deck.length-2]); // Push the 2nd to last card in the deck to dealerHand
+            playerHand.push(deck[deck.length-1]); // Push the last card in the deck to playerHand
         }
-        
-        console.log(dealerHand);
-        console.log(playerHand);
         updateDealerCardImages();
         updatePlayerCardImages();
+        calcScores();
+        document.getElementById('dealer-score').innerHTML = dealerScore;
+        document.getElementById('player-score').innerHTML = playerScore;
 }
 
-
 function updateDealerCardImages() {
-    const cardsElement = document.getElementById('dealer-cards');
-    cardsElement.innerHTML = '';
+    const dealerCardsElement = document.getElementById('dealer-cards');
+    dealerCardsElement.innerHTML = '';
     for (const card of dealerHand) {
-        const cardImage = document.createElement('img');
-        cardImage.src = `assets/images/cards/${card}.png`;
-        cardImage.alt = card;
-        cardsElement.appendChild(cardImage);
+        const dealerCardImage = document.createElement('img');
+        dealerCardImage.src = `assets/images/cards/${card}.png`;
+        dealerCardImage.alt = card;
+        dealerCardsElement.appendChild(cardImage);
     }
 }
 

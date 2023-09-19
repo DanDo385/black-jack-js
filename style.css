@@ -1,11 +1,11 @@
 body {
     font-family: 'Roboto Serif', serif;
     text-align: center;
-    background-color: green
+    background-image: yellowgreen;
 }
 
 #game-container {
-    background-color: white;
+    background-color: yellowgreen;
     width: justify;
     height: justify ;
 }
