@@ -92,12 +92,12 @@ function updateDealerCardImages() {
 
 function updatePlayerCardImages() {
     const cardsElement = document.getElementById('player-cards');
-    cardsElement.innerHTML = '';
+    playerCardsElement.innerHTML = '';
     for (const card of playerHand) {
         const cardImage = document.createElement('img');
-        cardImage.src = `assets/images/cards/${card}.png`;
-        cardImage.alt = card;
-        cardsElement.appendChild(cardImage);
+        playerCardImage.src = `assets/images/cards/${card}.png`;
+        playerCardImage.alt = card;
+        playerCardsElement.appendChild(cardImage);
     }
 }
 
