@@ -6,16 +6,13 @@ let playerScore = 0;
 let dealerScore = 0;
 let gameOver = false;
 
-// Initialize ace counts for player and dealer
+// Initialize ace counts for dealer and player
 let playerAceCount = 0;
-let dealerAceCount = 0;
+
 
 // Initialize score and result message
 let result = 0;
 let message = '';
-
-let hand = [];
-let score = 0;
 
 window.onload = function() {
     setStart();
@@ -48,7 +45,6 @@ function createDeck() {
         }
     }
 }
-
 //shuffles deck by uniquely swapping out each card with a random card from 
 //the deck rather than just picking a random card from the desk and risk getting multiple same cards
 function shuffleDeck(deck) {
@@ -64,11 +60,10 @@ function setStart() {
     dealerHand = ["BACK",];
     updateDealerCardImages();
     updatePlayerCardImages();
-    updateGame();
 }
 
     // create function to deal initial hand
-function initialDeal() {
+function deal() {
         for (let i = 0; i < 2; i++) {
             dealerHand.push(dealCard(deck));
             playerHand.push(dealCard(deck));
@@ -76,7 +71,11 @@ function initialDeal() {
         updateGame()
         console.log(dealerHand);
         console.log(playerHand);
+        updateDealerCardImages();
+        updatePlayerCardImages();
+
 }
+
 
 function updateDealerCardImages() {
     const cardsElement = document.getElementById('dealer-cards');
@@ -105,7 +104,7 @@ function updateGame() {
 for (const card of dealerHand) {
         const value = card.charAt(0);
         if (value === 'A') {
-        aceCount++;
+        dealerAceCount++;
         dealerScore += 11; // Assume Ace as 11 initially
         } else if (value === 'K' || value === 'Q' || value === 'J') {
         dealerScore += 10; // Face cards are worth 10 points
@@ -115,9 +114,8 @@ for (const card of dealerHand) {
     }
     for (const card of playerHand) {
         const value = card.charAt(0);
-        if (value === 'A') {
-        aceCount++;
-        playerScore += 11; // Assume Ace as 11 initially
+        if (value === 'A') { playerAceCount++;
+        playerScore += 11; // Assume Ace as 11 initially 
         } else if (value === 'K' || value === 'Q' || value === 'J') {
         playerScore += 10; // Face cards are worth 10 points
         } else {
@@ -129,9 +127,9 @@ while (dealerScore > 21 && dealerAceCount > 0) {
     dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
     dealerAceCount-- }
 
-while (playerScore > 21 && aceCount > 0) {
-    dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
-    dealerAceCount-- }
+while (playerScore > 21 && playerAceCount > 0) {
+    playerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
+    playerAceCount-- }
 }
 
 function hit() {
@@ -151,16 +149,15 @@ function stand() {
 
 // function to determine winner
 function determineWinner() {
-    if (playerScore === 21) {result = 1; message = 'BlackJack! Player wins!'}
-    else if (playerScore > 21) {result = 2; message = 'Player busts! Dealer wins!'} 
-    else if (dealerScore === 21) {result = 2; message = 'Dealer wins with BlackJack!'} 
-    else if (dealerScore > 21) {result = 1; message = 'Dealer busts! Player wins!'} 
-    else if (playerScore > dealerScore) {result = 1;message = 'Player wins!'} 
-    else if (playerScore < dealerScore) {result = 2;message = 'Dealer wins!'} 
-    else {result = 0; message = 'Push! Tie!';}
+    if (playerScore === 21) { result = 1; message = 'BlackJack! Player wins!' }
+    else if (playerScore > 21) {r esult = 2; message = 'Player busts! Dealer wins!' } 
+    else if (dealerScore === 21) { result = 2; message = 'Dealer wins with BlackJack!' } 
+    else if (dealerScore > 21) { result = 1; message = 'Dealer busts! Player wins!' } 
+    else if (playerScore > dealerScore) { result = 1; message = 'Player wins!' } 
+    else if (playerScore < dealerScore) { result = 2; message = 'Dealer wins!' } 
+    else { result = 0; message = 'Push! Tie!'; }
 
     if (result === 1 ){ "Player wins MFuh!" }
     else if (result === 2) { "Dealer wins MFuh!" }
-    else { "Push! Tie!" }   
-}
-
+    else { "Push! Tie! You're both losers!"  }
+    console.log(message);}
