@@ -27,12 +27,7 @@ const hitButton = document.getElementById('hit-button');
 const standButton = document.getElementById('stand-button');
 
 dealButton.addEventListener('click', function() {
-    createDeck();
-    shuffleDeck(deck);
-    initialDeal();
-    updateGame();
-    updateDealerCardImages();
-    updatePlayerCardImages();
+    deal(); // Call the deal() function when the deal button is clicked
 });
 
 hitButton.addEventListener('click', function() {
@@ -40,8 +35,7 @@ hitButton.addEventListener('click', function() {
 });
 
 standButton.addEventListener('click', function() {
-    stand();
-     // Call the stand() function when the stand button is clicked
+    stand(); // Call the stand() function when the stand button is clicked
 });
 
 function createDeck() {
@@ -81,7 +75,8 @@ function initialDeal() {
         }
         updateGame()
         console.log(dealerHand);
-    }
+        console.log(playerHand);
+}
 
 function updateDealerCardImages() {
     const cardsElement = document.getElementById('dealer-cards');

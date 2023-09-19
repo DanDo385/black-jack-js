@@ -6,35 +6,40 @@ body {
 
 #game-container {
     background-color: white;
-    width: 500px;
-    height: 700px;
-
+    width: justify;
+    height: justify ;
 }
 
 #dealer-cards img {
-    width: 124px;
-    height: 189px;
+    width: 250px;
+    height: 350px;
 }
 
 #player-cards img {
-    width: 124px;
-    height: 189px;
+    width: 250px;
+    height: 350px;
+}
+
+#deal-button {
+    background-color: red;
+    font-size: 20px; 
+    font-family: 'Roboto', sans-serif; 
 }
 
 #hit-button {
     background-color: orange;
-    font-size: 15px;
+    font-size: 20px;
     font-family: 'Arial', sans-serif;
 }
 
 #stand-button {
     background-color: yellow;
-    font-size: 15px; 
+    font-size: 20px; 
     font-family: 'Arial', sans-serif;
 }
 
 #double-button {
-    background-color: blue;
+    background-color: aqua;
     font-size: 15px; 
     font-family: 'Roboto', sans-serif; 
 }
