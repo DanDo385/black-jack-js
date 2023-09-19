@@ -1,7 +1,7 @@
 // Initialize the deck of cards and other variables
 let deck = [];
-let playerHand = [];
-let dealerHand = [];
+let playerHand = ["BACK"];
+let dealerHand = ['BACK'];
 let playerScore = 0;
 let dealerScore = 0;
 let gameOver = false;
@@ -17,6 +17,39 @@ window.onload = function() {
     setStart();
 }
 
+function createDeck() {
+    const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10','J', 'Q', 'K', 'A'];
+    const suits = ['C', 'D', 'H', 'S'];
+    
+    for (const suit of suits) {
+        for (const value of values) {
+            deck.push(`${value}-${suit}`);
+        }
+    }
+}
+
+createDeck();
+
+// shuffles deck by uniquely swapping out each card with a random card from 
+//the deck rather than just picking a random card from the desk and risk getting multiple same cards
+function shuffleDeck(deck) {
+    for (let i = 0; i < deck.length; i++) {
+    const j = Math.floor(Math.random() * deck.length);
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+}
+
+shuffleDeck(deck);  
+
+
+function setStart() {
+    playerHand = ['BACK'];
+    dealerHand = ["BACK"];
+    updateDealerCardImages();
+    updatePlayerCardImages();
+    document.getElementById('dealer-score').innerHTML = '0';
+    document.getElementById('player-score').innerHTML = '0';
+}
 // Add event listeners to the deal, hit, and stand button
 const dealButton = document.getElementById('deal-button');
 const hitButton = document.getElementById('hit-button');
@@ -33,39 +66,7 @@ hitButton.addEventListener('click', function() {
 standButton.addEventListener('click', function() {
     stand(); // Call the stand() function when the stand button is clicked
 });
-
-function createDeck() {
-    const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10','J', 'Q', 'K', 'A'];
-    const suits = ['C', 'D', 'H', 'S'];
-    
-    for (const suit of suits) {
-        for (const value of values) {
-            deck.push(`${value}-${suit}`);
-        }
-    }
-}
-//shuffles deck by uniquely swapping out each card with a random card from 
-//the deck rather than just picking a random card from the desk and risk getting multiple same cards
-function shuffleDeck(deck) {
-    for (let i = 0; i < deck.length; i++) {
-    const j = Math.floor(Math.random() * deck.length);
-    [deck[i], deck[j]] = [deck[j], deck[i]];
-    }
-}
-
-//set starting board
-function setStart() {
-    createDeck();
-    shuffleDeck(deck);
-    playerHand = ["BACK"];
-    dealerHand = ["BACK"];
-    updateDealerCardImages();
-    updatePlayerCardImages();
-    document.getElementById('dealer-score').innerHTML = '0';
-    document.getElementById('player-score').innerHTML = '0';
-}
-
-    // create function to deal initial hand
+// create function to deal initial hand
 function deal() {
         for (let i = 0; i < 2; i++) {
            dealerHand.push(deck[(deck.length-2)]); // Push the 2nd to last card in the deck to dealerHand
@@ -76,6 +77,24 @@ function deal() {
         updateDealerCardImages();
         updatePlayerCardImages();
         calcScores();   
+}
+
+function hit() {
+    playerHand = [];  
+    playerHand.push(deck[53]); // Push the last card in the deck to playerHand
+    updatePlayerCardImages();
+    calcScores();
+    document.getElementById('player-score').innerHTML = playerScore;
+    if (playerScore > 21) {
+        determineWinner();
+    }
+}
+
+function stand() {
+    while (dealerScore < 17) {
+        dealerHand.push(deck[(deck.length-2)]); // Push the last card in the deck to playerHand 
+        updateDealerCardImages();    
+    }                                                                   
 }
 
 function updateDealerCardImages() {
@@ -158,16 +177,16 @@ function determineWinner() {
         result = 0;
         message = 'Push! Tie!';
     }
-
-    if (result === 1) {
-        alert("Player wins MFuh!");
-    } else if (result === 2) {
-        alert("Dealer wins MFuh!");
-    } else {
-        alert("Push! Tie! You're both losers!");
-    }
 }
 
+if (result === 1) {
+    alert("Player wins MFuh!");
+} else if (result === 2) {
+    alert("Dealer wins MFuh!");
+} else {
+    alert("Push! Tie! You're both losers!");
+}
+console.log(message);   
 
 
 

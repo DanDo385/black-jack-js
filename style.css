@@ -4,13 +4,23 @@ body {
     background-color: rgb(49, 164, 112);
 }
 
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+  }
+
+
 #dealer-cards img {
-    width: 162px;
+    width: 189px;
     height: 279px;
 }
 
 #player-cards img {
-    width: 162px;
+    width: 189px;
     height: 279px;
 }
 
