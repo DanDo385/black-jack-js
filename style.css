@@ -5,13 +5,13 @@ body {
 }
 
 #dealer-cards img {
-    width: 250px;
-    height: 350px;
+    width: 162px;
+    height: 279px;
 }
 
 #player-cards img {
-    width: 250px;
-    height: 350px;
+    width: 162px;
+    height: 279px;
 }
 
 #deal-button {
