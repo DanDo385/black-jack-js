@@ -56,24 +56,28 @@ function shuffleDeck(deck) {
 
 //set starting board
 function setStart() {
-    playerHand = ["BACK","BACK"];
-    dealerHand = ["BACK",];
+    playerHand = ["BACK"];
+    dealerHand = ["BACK"];
     updateDealerCardImages();
     updatePlayerCardImages();
+    document.getElementById('dealer-score').innerHTML = '0';
+    document.getElementById('player-score').innerHTML = '0';
 }
 
     // create function to deal initial hand
 function deal() {
+        createDeck();
+        shuffleDeck(deck);
         for (let i = 0; i < 2; i++) {
-            dealerHand.push(dealCard(deck));
-            playerHand.push(dealCard(deck));
+            dealerHand.push(deck[1]); // Push the 2nd to last card in the deck to dealerHand
+            playerHand.push(deck[0]); // Push the last card in the deck to playerHand
+            deck.pop(); // Remove the last card from the deck
         }
-        updateGame()
+        
         console.log(dealerHand);
         console.log(playerHand);
         updateDealerCardImages();
         updatePlayerCardImages();
-
 }
 
 
@@ -99,9 +103,9 @@ function updatePlayerCardImages() {
     }
 }
 
-function updateGame() {
+function calcScores() {
 //  assign values to cards for scoring
-for (const card of dealerHand) {
+    for (const card of dealerHand) {
         const value = card.charAt(0);
         if (value === 'A') {
         dealerAceCount++;
@@ -112,6 +116,12 @@ for (const card of dealerHand) {
         dealerScore += parseInt(value); // Other cards are worth their face value
         }
     }
+
+    // If score>21 and there are aces, adjust ace value(s) to 1 from 11
+    while (dealerScore > 21 && dealerAceCount > 0) {
+        dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
+        dealerAceCount-- }
+    
     for (const card of playerHand) {
         const value = card.charAt(0);
         if (value === 'A') { playerAceCount++;
@@ -122,43 +132,47 @@ for (const card of dealerHand) {
         playerScore += parseInt(value); // Other cards are worth their face value
         }
     }
-  // If score>21 and there are aces, adjust ace value(s) to 1 from 11
-while (dealerScore > 21 && dealerAceCount > 0) {
-    dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
-    dealerAceCount-- }
-
-while (playerScore > 21 && playerAceCount > 0) {
-    playerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
-    playerAceCount-- }
+  
+    while (playerScore > 21 && playerAceCount > 0) {
+        playerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
+        playerAceCount-- }
 }
-
-function hit() {
-    playerHand.push(dealCard(deck));
-    updateGame();
-    updatePlayerCardImages()
-}
-
-function stand() {
-    if (dealerScore < 17) {
-        dealerHand.push(dealCard(deck));
-        updateGame();
-        updateDealerCardImages();
-    }
-    determineWinner();
-}
-
 // function to determine winner
 function determineWinner() {
-    if (playerScore === 21) { result = 1; message = 'BlackJack! Player wins!' }
-    else if (playerScore > 21) {result = 2; message = 'Player busts! Dealer wins!' } 
-    else if (dealerScore === 21) { result = 2; message = 'Dealer wins with BlackJack!' } 
-    else if (dealerScore > 21) { result = 1; message = 'Dealer busts! Player wins!' } 
-    else if (playerScore > dealerScore) { result = 1; message = 'Player wins!' } 
-    else if (playerScore < dealerScore) { result = 2; message = 'Dealer wins!' } 
-    else { result = 0; message = 'Push! Tie!'; }
+    if (playerScore === 21) {
+        result = 1;
+        message = 'BlackJack! Player wins!';
+    } else if (playerScore > 21) {
+        result = 2;
+        message = 'Player busts! Dealer wins!';
+    } else if (dealerScore === 21) {
+        result = 2;
+        message = 'Dealer wins with BlackJack!';
+    } else if (dealerScore > 21) {
+        result = 1;
+        message = 'Dealer busts! Player wins!';
+    } else if (playerScore > dealerScore) {
+        result = 1;
+        message = 'Player wins!';
+    } else if (playerScore < dealerScore) {
+        result = 2;
+        message = 'Dealer wins!';
+    } else {
+        result = 0;
+        message = 'Push! Tie!';
+    }
 
-    if (result === 1 ){ "Player wins MFuh!" }
-    else if (result === 2) { "Dealer wins MFuh!" }
-    else { "Push! Tie! You're both losers!"  }
-    console.log(message);
+    if (result === 1) {
+        alert("Player wins MFuh!");
+    } else if (result === 2) {
+        alert("Dealer wins MFuh!");
+    } else {
+        alert("Push! Tie! You're both losers!");
+    }
 }
+
+
+
+
+
+
