@@ -1,13 +1,7 @@
 body {
     font-family: 'Roboto Serif', serif;
     text-align: center;
-    background-image: yellowgreen;
-}
-
-#game-container {
-    background-color: yellowgreen;
-    width: justify;
-    height: justify ;
+    background-color: rgb(49, 164, 112);
 }
 
 #dealer-cards img {

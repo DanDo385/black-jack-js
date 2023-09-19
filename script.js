@@ -63,14 +63,15 @@ function setStart() {
     updatePlayerCardImages();
     document.getElementById('dealer-score').innerHTML = '0';
     document.getElementById('player-score').innerHTML = '0';
-    calcScores();
 }
 
     // create function to deal initial hand
 function deal() {
         for (let i = 0; i < 2; i++) {
-            dealerHand.push(deck[deck.length-2]); // Push the 2nd to last card in the deck to dealerHand
-            playerHand.push(deck[deck.length-1]); // Push the last card in the deck to playerHand
+            dealerHand.empty;
+            playerHand.empty;
+            dealerHand.push(deck[(deck.length-2)]); // Push the 2nd to last card in the deck to dealerHand
+            playerHand.push(deck[(deck.length-1)]); // Push the last card in the deck to playerHand
         }
         updateDealerCardImages();
         updatePlayerCardImages();
@@ -86,18 +87,18 @@ function updateDealerCardImages() {
         const dealerCardImage = document.createElement('img');
         dealerCardImage.src = `assets/images/cards/${card}.png`;
         dealerCardImage.alt = card;
-        dealerCardsElement.appendChild(cardImage);
+        dealerCardsElement.appendChild(dealerCardImage);
     }
 }
 
 function updatePlayerCardImages() {
-    const cardsElement = document.getElementById('player-cards');
+    const playerCardsElement = document.getElementById('player-cards');
     playerCardsElement.innerHTML = '';
     for (const card of playerHand) {
-        const cardImage = document.createElement('img');
+        const playerCardImage = document.createElement('img');
         playerCardImage.src = `assets/images/cards/${card}.png`;
         playerCardImage.alt = card;
-        playerCardsElement.appendChild(cardImage);
+        playerCardsElement.appendChild(playerCardImage);
     }
 }
 
