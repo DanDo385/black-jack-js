@@ -71,6 +71,7 @@ function setStart() {
     updateDealerCardImages();
     updatePlayerCardImages();
     updateGame();
+}
 
     // create function to deal initial hand
 function initialDeal() {
@@ -80,7 +81,7 @@ function initialDeal() {
         }
         updateGame()
         console.log(dealerHand);
-}
+    }
 
 function updateDealerCardImages() {
     const cardsElement = document.getElementById('dealer-cards');
@@ -105,55 +106,38 @@ function updatePlayerCardImages() {
 }
 
 function updateGame() {
-    //update player's hand
-    const playerCardsElement = document.getElementById('player-cards');
-        playerCardsElement.innerHTML = '';
-        for (const card of playerHand) {
-            const cardImage = document.createElement('div');
-            cardImage.src = `assets/images/cards/${card}.png`;
-            playerCardsElement.appendChild(cardImage);
-        }
-    //update dealer's hand
-    const dealerCardsElement = document.getElementById('dealer-cards');
-        dealerCardsElement.innerHTML = ''; 
-        for (const card of dealerHand) {
-            const cardImage = document.createElement('div');
-            cardImage.src = `assets/images/cards/${card}.png`;
-            dealerCardsElement.appendChild(cardImage);
-        }   
-    //assign values to cards    
-    for (const card of dealerHand) {
+//  assign values to cards for scoring
+for (const card of dealerHand) {
         const value = card.charAt(0);
         if (value === 'A') {
         aceCount++;
-        score += 11; // Assume Ace as 11 initially
+        dealerScore += 11; // Assume Ace as 11 initially
         } else if (value === 'K' || value === 'Q' || value === 'J') {
-        score += 10; // Face cards are worth 10 points
+        dealerScore += 10; // Face cards are worth 10 points
         } else {
-        score += parseInt(value); // Other cards are worth their face value
+        dealerScore += parseInt(value); // Other cards are worth their face value
         }
     }
     for (const card of playerHand) {
         const value = card.charAt(0);
         if (value === 'A') {
         aceCount++;
-        score += 11; // Assume Ace as 11 initially
+        playerScore += 11; // Assume Ace as 11 initially
         } else if (value === 'K' || value === 'Q' || value === 'J') {
-        score += 10; // Face cards are worth 10 points
+        playerScore += 10; // Face cards are worth 10 points
         } else {
-        score += parseInt(value); // Other cards are worth their face value
+        playerScore += parseInt(value); // Other cards are worth their face value
         }
     }
-}   
-
-    // If score>21 and there are aces, adjust ace value(s) to 1 from 11
+  // If score>21 and there are aces, adjust ace value(s) to 1 from 11
 while (dealerScore > 21 && dealerAceCount > 0) {
     dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
     dealerAceCount-- }
 
-    while (playerScore > 21 && aceCount > 0) {
-        dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
-        dealerAceCount-- }
+while (playerScore > 21 && aceCount > 0) {
+    dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
+    dealerAceCount-- }
+}
 
 function hit() {
     playerHand.push(dealCard(deck));
@@ -178,14 +162,10 @@ function determineWinner() {
     else if (dealerScore > 21) {result = 1; message = 'Dealer busts! Player wins!'} 
     else if (playerScore > dealerScore) {result = 1;message = 'Player wins!'} 
     else if (playerScore < dealerScore) {result = 2;message = 'Dealer wins!'} 
-    else {result = 0; message = 'Push! Tie!';
-    }
-
-    alert(message);
-    gameOver = true;
+    else {result = 0; message = 'Push! Tie!';}
 
     if (result === 1 ){ "Player wins MFuh!" }
     else if (result === 2) { "Dealer wins MFuh!" }
     else { "Push! Tie!" }   
 }
-}
+
