@@ -72,9 +72,11 @@ function deal() {
 
     // Draw two cards for dealer and player
     
-    dealerHand.push(deck.pop());
-    dealerHand.push(deck.pop());
     playerHand.push(deck.pop());
+    playerHand.push(deck.pop());
+    dealerHand.push(deck.pop());
+
+
 
     // Update scores
     dealerScore = 0;
@@ -93,19 +95,19 @@ function deal() {
 }
 
 function hit() {
-    playerHand = [];  
-    playerHand.push(deck[53]); // Push the last card in the deck to playerHand
+    playerHand = [0];  
+    playerHand.push(deck.pop); // Push the last card in the deck to playerHand
     updatePlayerCardImages();
     calcScores();
     document.getElementById('player-score').innerHTML = 0;
-    if (playerScore > 21) {
+    if (playerScore === 21) {
         determineWinner();
     }
 }
 
 function stand() {
     while (dealerScore < 17) {
-        dealerHand.push(deck[(deck.length-2)]); // Push the last card in the deck to playerHand 
+        dealerHand.push(deck.pop); // Push the last card(s) in the deck to dealerHand 
         updateDealerCardImages();    
     }                                                                   
 }
