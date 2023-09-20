@@ -1,18 +1,5 @@
-// Initialize the deck of cards and other variables
+// Initialize the deck of cards and shuffle the deck
 let deck = [];
-let playerHand = ["BACK"];
-let dealerHand = ['BACK'];
-let playerScore = 0;
-let dealerScore = 0;
-let gameOver = false;
-
-// Initialize ace counts for dealer and player
-let playerAceCount = 0;
-let dealerAceCount = 0;
-
-// Initialize score and result message
-let result = 0;
-let message = '';
 
 window.onload = function() {
     setStart();
@@ -28,7 +15,6 @@ function createDeck() {
         }
     }
 }
-
 createDeck();
 
 // shuffles deck by uniquely swapping out each card with a random card from 
@@ -39,8 +25,23 @@ function shuffleDeck(deck) {
     [deck[i], deck[j]] = [deck[j], deck[i]];
     }
 }
-
 shuffleDeck(deck);  
+
+// Initialize variables for buttons and calculations in the game    
+
+let playerHand = [];
+let dealerHand = [];
+let playerScore = 0;
+let dealerScore = 0;
+let gameOver = false;
+
+// Initialize ace counts for dealer and player
+let playerAceCount = 0;
+let dealerAceCount = 0;
+
+// Initialize score and result message
+let result = 0;
+let message = '';
 
 function setStart() {
     playerHand = ['BACK'];
@@ -66,35 +67,24 @@ standButton.addEventListener('click', function() {
 });
 // create function to deal initial hand
 function deal() {
-    dealerHand = ['BACK'];
-    playerHand = ['BACK'];
-
     // Draw two cards for dealer and player
     
     playerHand.push(deck.pop());
-    playerHand.push(deck.pop());
     dealerHand.push(deck.pop());
 
-    // Update scores
-    dealerScore = 0;
-    playerScore = 0;
-    
     updateDealerCardImages();
     updatePlayerCardImages();
-    calcScores();
+    updateDealerScore();
+    updatePlayerScore();
     
-    document.getElementById('dealer-score').innerHTML = '0';
-    document.getElementById('player-score').innerHTML = '0';
-
-    if (playerScore === 21) {
-        determineWinner();
-    }
+    dealerScore = document.getElementById('dealer-score').innerHTML
+    playerScore = document.getElementById('player-score').innerHTML
 }
 
 function hit() {
     playerHand.push(deck.pop()); // Push the last card in the deck to playerHand
     updatePlayerCardImages();
-    calcScores();
+    calcPlayerScore();
     document.getElementById('player-score').innerHTML = playerScore;
     if (playerScore === 21) {
         determineWinner();
@@ -104,6 +94,7 @@ function hit() {
 function stand() {
     while (dealerScore < 17) {
         dealerHand.push(deck.pop); // Push the last card(s) in the deck to dealerHand 
+        calcDealerScore()
         updateDealerCardImages();    
     }                                                                   
 }
