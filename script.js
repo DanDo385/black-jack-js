@@ -84,14 +84,17 @@ function hit() {
     const card = deck.pop(); // Draw one card from the deck
     playerHand.push(card); // Add the card to the player's hand
     updatePlayerCardImages();
-    if( playerScore > 21) {
+    calcPlayerScore();
+    if(playerScore === 21) {
+        determineWinner();
+    } else if (playerScore > 21) {  
         determineWinner();
     }
-
 }
 function stand() {
     while (dealerScore < 17) {
-        dealerHand.push(deck.pop); // Push the last card(s) in the deck to dealerHand 
+        const card = deck.pop(); // Draw one card from the deck
+        dealerHand.push(card); // Add the card(s) to the dealer's hand
         calcDealerScore()
         updateDealerCardImages();    
     }                                                                   
@@ -157,10 +160,11 @@ function calcPlayerScore() {
         playerAceCount-- 
     }
     return playerScore;
+    console.log(playerScore);
 }
 // function to determine winner
 function determineWinner() {
-    if (!gameOver) {
+    if (gameOver=false) {
         if (playerScore === 21) {
             result = 1;
             message = 'BlackJack! Player wins!';
