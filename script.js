@@ -67,15 +67,29 @@ standButton.addEventListener('click', function() {
 });
 // create function to deal initial hand
 function deal() {
-        for (let i = 0; i < 2; i++) {
-           dealerHand.push(deck[(deck.length-2)]); // Push the 2nd to last card in the deck to dealerHand
-           playerHand.push(deck[(deck.length-1)]); // Push the last card in the deck to playerHand
-        }
-        document.getElementById('dealer-score').innerHTML = dealerScore;
-        document.getElementById('player-score').innerHTML = playerScore;
-        updateDealerCardImages();
-        updatePlayerCardImages();
-        calcScores();   
+    dealerHand = ['BACK'];
+    playerHand = ['BACK'];
+
+    // Draw two cards for dealer and player
+    
+    dealerHand.push(deck.pop());
+    dealerHand.push(deck.pop());
+    playerHand.push(deck.pop());
+
+    // Update scores
+    dealerScore = 0;
+    playerScore = 0;
+    
+    updateDealerCardImages();
+    updatePlayerCardImages();
+    calcScores();
+    
+    document.getElementById('dealer-score').innerHTML = dealerScore;
+    document.getElementById('player-score').innerHTML = playerScore;
+
+    if (playerScore === 21) {
+        determineWinner();
+    }
 }
 
 function hit() {
@@ -83,7 +97,7 @@ function hit() {
     playerHand.push(deck[53]); // Push the last card in the deck to playerHand
     updatePlayerCardImages();
     calcScores();
-    document.getElementById('player-score').innerHTML = playerScore;
+    document.getElementById('player-score').innerHTML = 0;
     if (playerScore > 21) {
         determineWinner();
     }
