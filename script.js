@@ -149,6 +149,7 @@ function calcDealerScore() {
         dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
         dealerAceCount-- 
     }
+    return dealerScore;
 }
 
 function calcPlayerScore() {
@@ -167,6 +168,7 @@ function calcPlayerScore() {
         playerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
         playerAceCount-- 
     }
+    return playerScore;
 }
 // function to determine winner
 function determineWinner() {
