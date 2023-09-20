@@ -75,12 +75,19 @@ function deal() {
     updatePlayerCardImages();
     calcDealerScore();
     calcPlayerScore();
+    if (playerScore === 21) {
+        determineWinner();
+    }
 }
 
 function hit() {
     const card = deck.pop(); // Draw one card from the deck
     playerHand.push(card); // Add the card to the player's hand
     updatePlayerCardImages();
+    if( playerScore > 21) {
+        determineWinner();
+    }
+
 }
 function stand() {
     while (dealerScore < 17) {
@@ -125,12 +132,12 @@ function calcDealerScore() {
         dealerScore += parseInt(value); // Other cards are worth their face value
         }
     }
-
     // If score>21 and there are aces, adjust ace value(s) to 1 from 11
     while (dealerScore > 21 && dealerAceCount > 0) {
         dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
         dealerAceCount-- 
     }
+    return dealerScore;
 }
 
 function calcPlayerScore() {
@@ -149,6 +156,7 @@ function calcPlayerScore() {
         playerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
         playerAceCount-- 
     }
+    return playerScore;
 }
 // function to determine winner
 function determineWinner() {
