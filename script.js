@@ -42,7 +42,6 @@ function shuffleDeck(deck) {
 
 shuffleDeck(deck);  
 
-
 function setStart() {
     playerHand = ['BACK'];
     dealerHand = ["BACK"];
@@ -76,8 +75,7 @@ function deal() {
     playerHand.push(deck.pop());
     dealerHand.push(deck.pop());
 
-
-// Update scores
+    // Update scores
     dealerScore = 0;
     playerScore = 0;
     
@@ -94,11 +92,10 @@ function deal() {
 }
 
 function hit() {
-    playerHand = [];  
-    playerHand.push(deck.pop); // Push the last card in the deck to playerHand
+    playerHand.push(deck.pop()); // Push the last card in the deck to playerHand
     updatePlayerCardImages();
     calcScores();
-    document.getElementById('player-score').innerHTML = 0;
+    document.getElementById('player-score').innerHTML = playerScore;
     if (playerScore === 21) {
         determineWinner();
     }
@@ -133,7 +130,7 @@ function updatePlayerCardImages() {
     }
 }
 
-function calcScores() {
+function calcDealerScore() {
 //  assign values to cards for scoring
     for (const card of dealerHand) {
         const value = card.charAt(0);
@@ -150,10 +147,11 @@ function calcScores() {
     // If score>21 and there are aces, adjust ace value(s) to 1 from 11
     while (dealerScore > 21 && dealerAceCount > 0) {
         dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
-        dealerAceCount-- }
+        dealerAceCount-- 
+    }
+}
 
-        return dealerScore;
-    
+function calcPlayerScore() {
     for (const card of playerHand) {
         const value = card.charAt(0);
         if (value === 'A') { playerAceCount++;
@@ -167,45 +165,39 @@ function calcScores() {
   
     while (playerScore > 21 && playerAceCount > 0) {
         playerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
-        playerAceCount-- }
-    
-        return playerScore;
-
+        playerAceCount-- 
+    }
 }
 // function to determine winner
 function determineWinner() {
     if (!gameOver) {
-    if (playerScore === 21) {
-        result = 1;
-        message = 'BlackJack! Player wins!';
-    } else if (playerScore > 21) {
-        result = 2;
-        message = 'Player busts! Dealer wins!';
-    } else if (dealerScore === 21) {
-        result = 2;
-        message = 'Dealer wins with BlackJack!';
-    } else if (dealerScore > 21) {
-        result = 1;
-        message = 'Dealer busts! Player wins!';
-    } else if (playerScore > dealerScore) {
-        result = 1;
-        message = 'Player wins!';
-    } else if (playerScore < dealerScore) {
-        result = 2;
-        message = 'Dealer wins!';
-    } else {
-        result = 0;
-        message = 'Push! Tie!';
-    }}
+        if (playerScore === 21) {
+            result = 1;
+            message = 'BlackJack! Player wins!';
+        } else if (playerScore > 21) {
+            result = 2;
+            message = 'Player busts! Dealer wins!';
+        } else if (dealerScore === 21) {
+            result = 2;
+            message = 'Dealer wins with BlackJack!';
+        } else if (dealerScore > 21) {
+            result = 1;
+            message = 'Dealer busts! Player wins!';
+        } else if (playerScore > dealerScore) {
+            result = 1;
+            message = 'Player wins!';
+        } else if (playerScore < dealerScore) {
+            result = 2;
+            message = 'Dealer wins!';
+        } else {
+            result = 0;
+            message = 'Push! Tie!';
+        }
+    }
+    gameOver = true;
+    document.getElementById('result').innerHTML = message;
 }
 
-if (result === 1) {
-    alert("Player wins MFuh!");
-} else if (result === 2) {
-    alert("Dealer wins MFuh!");
-} else {
-    alert("Push! Tie! You're both losers!");
-}
 console.log(message);   
 
 
