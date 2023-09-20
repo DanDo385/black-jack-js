@@ -29,8 +29,8 @@ shuffleDeck(deck);
 
 // Initialize variables for buttons and calculations in the game    
 
-let playerHand = [];
-let dealerHand = [];
+let playerHand = ["BACK", "BACK"];
+let dealerHand = ["BACK"];
 let playerScore = 0;
 let dealerScore = 0;
 let gameOver = false;
@@ -44,8 +44,6 @@ let result = 0;
 let message = '';
 
 function setStart() {
-    playerHand = ['BACK'];
-    dealerHand = ["BACK"];
     updateDealerCardImages();
     updatePlayerCardImages();
 }
@@ -68,36 +66,22 @@ standButton.addEventListener('click', function() {
 // create function to deal initial hand
 function deal() {
     // Draw two cards for dealer and player
-    
-    playerHand.push(deck.pop());
+    dealerHand = [];
+    playerHand = [];
     dealerHand.push(deck.pop());
-
+    playerHand.push(deck.pop());
+    playerHand.push(deck.pop());
     updateDealerCardImages();
     updatePlayerCardImages();
     calcDealerScore();
     calcPlayerScore();
-    
-    dealerScore = document.getElementById('dealer-score').innerHTML
-    playerScore = document.getElementById('player-score').innerHTML
 
-    if (playerScore === 21) {
-        determineWinner();
-    }
-    console.log(dealerScore);
-    console.log(playerScore);
 }
-
-
-
 
 function hit() {
     playerHand.push(deck.pop()); // Push the last card in the deck to playerHand
     updatePlayerCardImages();
-    calcPlayerScore();
     document.getElementById('player-score').innerHTML = playerScore;
-    if (playerScore === 21) {
-        determineWinner();
-    }
 }
 
 function stand() {
@@ -149,7 +133,6 @@ function calcDealerScore() {
         dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
         dealerAceCount-- 
     }
-    return dealerScore;
 }
 
 function calcPlayerScore() {
@@ -168,7 +151,6 @@ function calcPlayerScore() {
         playerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
         playerAceCount-- 
     }
-    return playerScore;
 }
 // function to determine winner
 function determineWinner() {
