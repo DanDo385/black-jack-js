@@ -78,6 +78,10 @@ function deal() {
     if (playerScore === 21) {
         determineWinner();
     }
+    console.log(dealerHand);
+    console.log(playerHand);
+    console.log(dealerScore);
+    console.log(playerScore);   
 }
 
 function hit() {
@@ -85,9 +89,14 @@ function hit() {
     playerHand.push(card); // Add the card to the player's hand
     updatePlayerCardImages();
     calcPlayerScore();
-    if(playerScore === 21) {
+    if (playerScore === 21) {
         determineWinner();
-    } else if (playerScore > 21) {  
+    } else if (playerScore > 21) {
+        determineWinner();
+    }
+    
+    // Check for the winner after the hit
+    if (!gameOver) {
         determineWinner();
     }
 }
@@ -95,9 +104,10 @@ function stand() {
     while (dealerScore < 17) {
         const card = deck.pop(); // Draw one card from the deck
         dealerHand.push(card); // Add the card(s) to the dealer's hand
-        calcDealerScore()
+        calcDealerScore();
         updateDealerCardImages();    
-    }                                                                   
+    }        
+    determineWinner();                                                           
 }
 
 function updateDealerCardImages() {
@@ -160,7 +170,7 @@ function calcPlayerScore() {
         playerAceCount-- 
     }
     return playerScore;
-    console.log(playerScore);
+    
 }
 // function to determine winner
 function determineWinner() {
@@ -168,28 +178,35 @@ function determineWinner() {
         if (playerScore === 21) {
             result = 1;
             message = 'BlackJack! Player wins!';
+            gameOver = true;
         } else if (playerScore > 21) {
             result = 2;
             message = 'Player busts! Dealer wins!';
+            gameOver = true;
         } else if (dealerScore === 21) {
             result = 2;
             message = 'Dealer wins with BlackJack!';
+            gameOver = true;
         } else if (dealerScore > 21) {
             result = 1;
             message = 'Dealer busts! Player wins!';
+            gameOver = true;
         } else if (playerScore > dealerScore) {
             result = 1;
             message = 'Player wins!';
+            gameOver = true;
         } else if (playerScore < dealerScore) {
             result = 2;
             message = 'Dealer wins!';
+            gameOver = true;
         } else {
             result = 0;
             message = 'Push! Tie!';
+            gameOver = true;
         }
     }
-    gameOver = true;
-    document.getElementById('result').innerHTML = message;
+    
+    message = document.getElementById('message').innerHTML;
 }
 
 console.log(message);   
