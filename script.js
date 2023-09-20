@@ -29,7 +29,7 @@ shuffleDeck(deck);
 
 // Initialize variables for buttons and calculations in the game    
 
-let playerHand = ["BACK", "BACK"];
+let playerHand = ["BACK"];
 let dealerHand = ["BACK"];
 let playerScore = 0;
 let dealerScore = 0;
@@ -75,15 +75,13 @@ function deal() {
     updatePlayerCardImages();
     calcDealerScore();
     calcPlayerScore();
-
 }
 
 function hit() {
-    playerHand.push(deck.pop()); // Push the last card in the deck to playerHand
+    const card = deck.pop(); // Draw one card from the deck
+    playerHand.push(card); // Add the card to the player's hand
     updatePlayerCardImages();
-    document.getElementById('player-score').innerHTML = playerScore;
 }
-
 function stand() {
     while (dealerScore < 17) {
         dealerHand.push(deck.pop); // Push the last card(s) in the deck to dealerHand 
