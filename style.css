@@ -1,9 +1,8 @@
 body {
     font-family: 'Roboto Serif', serif;
     text-align: center;
-    background-color: rgb(49, 164, 112);
+    background-color: limegreen;
 }
-
 
 .material-symbols-outlined {
     font-variation-settings:
@@ -49,7 +48,7 @@ body {
 }
 
 #split-button {
-    background-color: yellow;
+    background-color:blueviolet;
     font-size: 15px; 
     font-family: 'Ubuntu', sans-serif; 
 }

@@ -77,8 +77,7 @@ function deal() {
     dealerHand.push(deck.pop());
 
 
-
-    // Update scores
+// Update scores
     dealerScore = 0;
     playerScore = 0;
     
@@ -86,8 +85,8 @@ function deal() {
     updatePlayerCardImages();
     calcScores();
     
-    document.getElementById('dealer-score').innerHTML = dealerScore;
-    document.getElementById('player-score').innerHTML = playerScore;
+    document.getElementById('dealer-score').innerHTML = '0';
+    document.getElementById('player-score').innerHTML = '0';
 
     if (playerScore === 21) {
         determineWinner();
@@ -95,7 +94,7 @@ function deal() {
 }
 
 function hit() {
-    playerHand = [0];  
+    playerHand = [];  
     playerHand.push(deck.pop); // Push the last card in the deck to playerHand
     updatePlayerCardImages();
     calcScores();
