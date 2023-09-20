@@ -8,6 +8,7 @@ let gameOver = false;
 
 // Initialize ace counts for dealer and player
 let playerAceCount = 0;
+let dealerAceCount = 0;
 
 // Initialize score and result message
 let result = 0;
@@ -47,8 +48,6 @@ function setStart() {
     dealerHand = ["BACK"];
     updateDealerCardImages();
     updatePlayerCardImages();
-    document.getElementById('dealer-score').innerHTML = '0';
-    document.getElementById('player-score').innerHTML = '0';
 }
 // Add event listeners to the deal, hit, and stand button
 const dealButton = document.getElementById('deal-button');
@@ -137,6 +136,8 @@ function calcScores() {
     while (dealerScore > 21 && dealerAceCount > 0) {
         dealerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
         dealerAceCount-- }
+
+        return dealerScore;
     
     for (const card of playerHand) {
         const value = card.charAt(0);
@@ -152,9 +153,13 @@ function calcScores() {
     while (playerScore > 21 && playerAceCount > 0) {
         playerScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
         playerAceCount-- }
+    
+        return playerScore;
+
 }
 // function to determine winner
 function determineWinner() {
+    if (!gameOver) {
     if (playerScore === 21) {
         result = 1;
         message = 'BlackJack! Player wins!';
@@ -176,7 +181,7 @@ function determineWinner() {
     } else {
         result = 0;
         message = 'Push! Tie!';
-    }
+    }}
 }
 
 if (result === 1) {
