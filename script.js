@@ -85,6 +85,7 @@ function hit() {
     playerHand.push(card); // Add the card to the player's hand
     updatePlayerCardImages();
     calcPlayerScore();
+    console.log(playerScore)
     if (playerScore === 21) {
         determineWinner();
     } else if (playerScore > 21) {
@@ -128,10 +129,14 @@ function determineWinner() {
             result = 2;
             message.innerHTML = 'Dealer wins!';
             gameOver = true;
+        } else if (playerScore < dealerScore) {
+            result = 2;
+            message.innerHTML = 'Dealer wins!';
+            gameOver = true;
         } else {
             result = 0;
-            message.innerHTML = 'Push! Tie!';
-            gameOver = true;
+            message.innerHTML = 'Game not over yet! (Duh)!';
+            gameOver = false;
         }
     }
 }
@@ -207,41 +212,33 @@ function calcPlayerScore() {
 }
 // function to determine winner of the game
 function determineWinner() {
+    // Boolean notation if gameOver = False 
     if (!gameOver) {
         if (playerScore === 21) {
             result = 1;
             message.innerHTML = 'BlackJack! Player wins!';
-            gameOver = true;
         } else if (playerScore > 21) {
             result = 2;
             message.innerHTML = 'Player busts! Dealer wins!';
-            gameOver = true;
         } else if (dealerScore === 21) {
             result = 2;
             message.innerHTML = 'Dealer wins with BlackJack!';
-            gameOver = true;
         } else if (dealerScore > 21) {
             result = 1;
             message.innerHTML = 'Dealer busts! Player wins!';
-            gameOver = true;
         } else if (playerScore > dealerScore) {
             result = 1;
             message.innerHTML = 'Player wins!';
-            gameOver = true;
         } else if (playerScore < dealerScore) {
             result = 2;
             message.innerHTML = 'Dealer wins!';
-            gameOver = true;
         } else {
             result = 0;
             message.innerHTML = 'Push! Tie! You both suck!';
-            gameOver = true;
         }
+        gameOver = true; // Set gameOver to true after determining the winner
     }
 }
-
-console.log(message);   
-
 
 
 
