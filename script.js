@@ -151,6 +151,7 @@ function calcDealerScore() {
         dealerAceCount-- 
     }
     return dealerScore;
+    console.log(dealerScore);
 }
 
 function calcPlayerScore() {
