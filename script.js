@@ -5,6 +5,11 @@ window.onload = function() {
     setStart();
 }
 
+function setStart() {
+    updateDealerCardImages();
+    updatePlayerCardImages();
+}
+
 function createDeck() {
     const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10','J', 'Q', 'K', 'A'];
     const suits = ['C', 'D', 'H', 'S'];
@@ -16,7 +21,6 @@ function createDeck() {
     }
 }
 createDeck();
-
 // shuffles deck by uniquely swapping out each card with a random card from 
 //the deck rather than just picking a random card from the desk and risk getting multiple same cards
 function shuffleDeck(deck) {
@@ -26,7 +30,6 @@ function shuffleDeck(deck) {
     }
 }
 shuffleDeck(deck);  
-
 // Initialize variables for buttons and calculations in the game    
 
 let playerHand = ["BACK"];
@@ -43,10 +46,6 @@ let dealerAceCount = 0;
 let result = 0;
 let message = '';
 
-function setStart() {
-    updateDealerCardImages();
-    updatePlayerCardImages();
-}
 // Add event listeners to the deal, hit, and stand button
 const dealButton = document.getElementById('deal-button');
 const hitButton = document.getElementById('hit-button');
@@ -79,7 +78,6 @@ function deal() {
     }
     console.log(dealerHand);
     console.log(playerHand);
-      
 }
 
 function hit() {
@@ -92,6 +90,17 @@ function hit() {
     } else if (playerScore > 21) {
         determineWinner();
     }
+}
+
+function stand() {
+    while (dealerScore < 17) {
+        const card = deck.pop(); // Draw one card from the deck
+        dealerHand.push(card); // Add the card(s) to the dealer's hand
+        calcDealerScore();
+        updateDealerCardImages();    
+        }        
+        determineWinner();                                                           
+}
 
 function determineWinner() {
     if (!gameOver) {
@@ -132,16 +141,6 @@ function determineWinner() {
     if (!gameOver) {
         determineWinner();
     }
-}
-function stand() {
-    while (dealerScore < 17) {
-        const card = deck.pop(); // Draw one card from the deck
-        dealerHand.push(card); // Add the card(s) to the dealer's hand
-        calcDealerScore();
-        updateDealerCardImages();    
-    }        
-    determineWinner();                                                           
-}
 
 function updateDealerCardImages() {
     const dealerCardsElement = document.getElementById('dealer-cards');
@@ -164,7 +163,7 @@ function updatePlayerCardImages() {
         playerCardsElement.appendChild(playerCardImage);
     }
 }
-
+// function to calculate dealer score
 function calcDealerScore() {
 //  assign values to cards for scoring
     for (const card of dealerHand) {
@@ -186,7 +185,7 @@ function calcDealerScore() {
     return dealerScore;
     console.log(dealerScore);
 }
-
+// same as above (calcDealerScore) but for player
 function calcPlayerScore() {
     for (const card of playerHand) {
         const value = card.charAt(0);
@@ -206,7 +205,7 @@ function calcPlayerScore() {
     return playerScore;
     
 }
-// function to determine winner
+// function to determine winner of the game
 function determineWinner() {
     if (!gameOver) {
         if (playerScore === 21) {
@@ -235,7 +234,7 @@ function determineWinner() {
             gameOver = true;
         } else {
             result = 0;
-            message.innerHTML = 'Push! Tie!';
+            message.innerHTML = 'Push! Tie! You both suck!';
             gameOver = true;
         }
     }
