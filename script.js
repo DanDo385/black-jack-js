@@ -165,7 +165,7 @@ function calcDealerScore() {
 }
 // same as above (calcDealerScore) but for player
 function calcPlayerScore() {
-    playerScore - 0;
+    playerScore = 0;
     for (const card of playerHand) {
         const value = card.charAt(0);
         if (value === 'A') { playerAceCount++;
