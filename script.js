@@ -1,15 +1,36 @@
 // Initialize the deck of cards and shuffle the deck
 let deck = [];
 
+// Initialize variables for the game
+let playerHand = ["BACK"];
+let dealerHand = ["BACK"];
+let playerScore = 0;
+let dealerScore = 0;
+let gameOver = false;
+
+// Initialize ace counts for dealer and player
+let playerAceCount = 0;
+let dealerAceCount = 0;
+
+// Initialize playerScore and dealerScore elements so not to repeat code
+let playerScoreElement = document.getElementById('player-score');
+let dealerScoreElement = document.getElementById('dealer-score');
+let messageElement = document.getElementById('message');    
+
+// Initialize score and result message
+let result = 0;
+
+
 window.onload = function() {
     setStart();
 }
 
 function setStart() {
-    updateDealerCardImages();
+    let playerHand = ["BACK"];
+    let dealerHand = ["BACK"];updateDealerCardImages();
     updatePlayerCardImages();
     playerScoreElement.innerText = '0';
-    dealerScoreElement.innerText = '0';
+    dealerScoreElement.innerText = '0';  
 }
 
 function createDeck() {
@@ -36,23 +57,6 @@ shuffleDeck(deck);
 
 // Initialize variables for buttons and calculations in the game    
 
-let playerHand = ["BACK"];
-let dealerHand = ["BACK"];
-let playerScore = 0;
-let dealerScore = 0;
-let gameOver = false;
-
-// Initialize ace counts for dealer and player
-let playerAceCount = 0;
-let dealerAceCount = 0;
-
-// Initialize playerScore and dealerScore elements so not to repeat code
-let playerScoreElement = document.getElementById('player-score');
-let dealerScoreElement = document.getElementById('dealer-score');
-
-// Initialize score and result message
-let result = 0;
-let message = '';
 
 // Add event listeners to the deal, hit, and stand button
 const dealButton = document.getElementById('deal-button');
@@ -76,6 +80,12 @@ function deal() {
     dealerHand = []; // Empty the board with the back of the cards and empty array with back of cards to only 
                      // show the cards dealt to the dealer and player
     playerHand = [];
+    
+    playerScoreElement.innerText = 0;
+    dealerScoreElement.innerText = 0;
+
+    messageElement.innerText = 'Good luck! (Even though there is no such thing...';   
+    
     dealerHand.push(deck.pop());
     playerHand.push(deck.pop());
     playerHand.push(deck.pop());
@@ -111,6 +121,7 @@ function stand() {
         const card = deck.pop();
         dealerHand.push(card);
         calcDealerScore();
+        calcPlayerScore();
         updateDealerCardImages();
         playerScoreElement.innerText = playerScore;
         dealerScoreElement.innerText = dealerScore;
@@ -149,7 +160,7 @@ function calcDealerScore() {
         if (value === 'A') {
         dealerAceCount++;
         dealerScore += 11; // Assume Ace as 11 initially
-        } else if (value === 'K' || value === 'Q' || value === 'J') {
+        } else if (value === 'K' || value === 'Q' || value === 'J' || value === '1') {
         dealerScore += 10; // Face cards are worth 10 points
         } else {
         dealerScore += parseInt(value); // Other cards are worth their face value
@@ -170,7 +181,7 @@ function calcPlayerScore() {
         const value = card.charAt(0);
         if (value === 'A') { playerAceCount++;
         playerScore += 11; // Assume Ace as 11 initially 
-        } else if (value === 'K' || value === 'Q' || value === 'J') {
+        } else if (value === 'K' || value === 'Q' || value === 'J' || value === '1') {
         playerScore += 10; // Face cards are worth 10 points
         } else {
         playerScore += parseInt(value); // Other cards are worth their face value
@@ -223,6 +234,7 @@ function determineWinner() {
             message = 'Game not over yet! (Duh)!';
             gameOver = false;
         }
+        messageElement.innerText = message;
     }
-    messageElement.innerText = message;
+    setStart();
 }
