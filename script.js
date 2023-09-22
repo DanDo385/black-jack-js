@@ -8,6 +8,8 @@ window.onload = function() {
 function setStart() {
     updateDealerCardImages();
     updatePlayerCardImages();
+    playerScoreElement.innerText = '0';
+    dealerScoreElement.innerText = '0';
 }
 
 function createDeck() {
@@ -43,6 +45,10 @@ let gameOver = false;
 // Initialize ace counts for dealer and player
 let playerAceCount = 0;
 let dealerAceCount = 0;
+
+// Initialize playerScore and dealerScore elements so not to repeat code
+let playerScoreElement = document.getElementById('player-score');
+let dealerScoreElement = document.getElementById('dealer-score');
 
 // Initialize score and result message
 let result = 0;
@@ -86,7 +92,6 @@ function deal() {
     console.log(playerHand);
     playerScoreElement.innerText = playerScore;
     dealerScoreElement.innerText = dealerScore;
-
 }
 
 function hit() {
@@ -94,6 +99,7 @@ function hit() {
     playerHand.push(card); // Add the card to the player's hand
     updatePlayerCardImages();
     calcPlayerScore();
+    calcDealerScore();
     console.log(playerScore)
     if (playerScore >= 21) {
         determineWinner();
