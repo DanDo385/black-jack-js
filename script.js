@@ -74,6 +74,10 @@ standButton.addEventListener('click', function() {
 });
 // create function to deal initial hand
 function deal() {
+    gameOver = false; // Set gameOver to false to start a new game
+   
+    hitButton.disabled = false;   // Enable the hit and stand buttons
+    standButton.disabled = false;
     // Draw two cards for dealer and player
     dealerHand = []; // Empty the board with the back of the cards and empty array with back of cards to only 
                      // show the cards dealt to the dealer and player
@@ -94,8 +98,6 @@ function deal() {
     if (playerScore === 21) {   
         determineWinner();
     }   
-    console.log(dealerHand);
-    console.log(playerHand);
     playerScoreElement.innerText = playerScore;
     dealerScoreElement.innerText = dealerScore;
 }
@@ -177,7 +179,6 @@ function calcDealerScore() {
         dealerAceCount-- 
     }
     return dealerScore;
-    console.log(dealerScore);
 }
 // same as above (calcDealerScore) but for player
 function calcPlayerScore() {
@@ -245,4 +246,6 @@ function determineWinner() {
 
     setStart();
     messageElement.innerText = message;
+    hitButton.disabled = true;
+    standButton.disabled = true;
 }
