@@ -75,11 +75,18 @@ function deal() {
     updateDealerCardImages();
     updatePlayerCardImages();
     calcPlayerScore();
-    if (playerScore >= 21) {
+    calcDealerScore();
+    if (dealerScore === 21) {
         determineWinner();
     }
+    if (playerScore === 21) {   
+        determineWinner();
+    }   
     console.log(dealerHand);
     console.log(playerHand);
+    playerScoreElement.innerText = playerScore;
+    dealerScoreElement.innerText = dealerScore;
+
 }
 
 function hit() {
@@ -91,6 +98,8 @@ function hit() {
     if (playerScore >= 21) {
         determineWinner();
     }
+    playerScoreElement.innerText = playerScore;
+    dealerScoreElement.innerText = dealerScore;
 }
 
 function stand() {
@@ -99,6 +108,8 @@ function stand() {
         dealerHand.push(card);
         calcDealerScore();
         updateDealerCardImages();
+        playerScoreElement.innerText = playerScore;
+        dealerScoreElement.innerText = dealerScore;
     }
     determineWinner(); // Move this outside the if condition
 }
