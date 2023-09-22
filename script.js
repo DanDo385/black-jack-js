@@ -73,7 +73,8 @@ standButton.addEventListener('click', function() {
 // create function to deal initial hand
 function deal() {
     // Draw two cards for dealer and player
-    dealerHand = []; // Empty the board with the back of the cards and show face cards 
+    dealerHand = []; // Empty the board with the back of the cards and empty array with back of cards to only 
+                     // show the cards dealt to the dealer and player
     playerHand = [];
     dealerHand.push(deck.pop());
     playerHand.push(deck.pop());
