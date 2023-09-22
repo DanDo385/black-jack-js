@@ -75,7 +75,7 @@ function deal() {
     updateDealerCardImages();
     updatePlayerCardImages();
     calcPlayerScore();
-    if (playerScore === 21 || playerScore > 21) {
+    if (playerScore >= 21) {
         determineWinner();
     }
     console.log(dealerHand);
@@ -100,9 +100,10 @@ function stand() {
         calcDealerScore();
         updateDealerCardImages();    
         }        
-        if (dealerScore >= 0) {
+        if (dealerScore >= 21) {
         determineWinner();                                                           
         }
+}
 
 function updateDealerCardImages() {
     const dealerCardsElement = document.getElementById('dealer-cards');
@@ -194,18 +195,10 @@ function determineWinner() {
             result = 2;
             message.innerHTML = 'Dealer wins!';
             gameOver = true;
-        } else if (playerScore < dealerScore) {
-            result = 2;
-            message.innerHTML = 'Dealer wins!';
-            gameOver = true;
-        } else {
+        } else { // This is sufficient to handle the case when playerScore === dealerScore
             result = 0;
             message.innerHTML = 'Game not over yet! (Duh)!';
             gameOver = false;
         }
     }
 }
-
-
-
-
