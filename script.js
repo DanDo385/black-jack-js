@@ -83,9 +83,6 @@ function deal() {
     updatePlayerCardImages();
     calcPlayerScore();
     calcDealerScore();
-    if (dealerScore === 21) {
-        determineWinner();
-    }
     if (playerScore === 21) {   
         determineWinner();
     }   
