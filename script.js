@@ -26,11 +26,9 @@ window.onload = function() {
 }
 
 function setStart() {
-    let playerHand = ["BACK"];
-    let dealerHand = ["BACK"];updateDealerCardImages();
+    updateDealerCardImages();
     updatePlayerCardImages();
-    playerScoreElement.innerText = '0';
-    dealerScoreElement.innerText = '0';  
+    messageElement.innerText = 'Good luck! (Even though there is no such thing...)';
 }
 
 function createDeck() {
@@ -108,12 +106,14 @@ function hit() {
     updatePlayerCardImages();
     calcPlayerScore();
     calcDealerScore();
-    console.log(playerScore)
+    console.log(playerScore);
+    playerScoreElement.innerText = playerScore;
+    dealerScoreElement.innerText = dealerScore;
+
+    // Check if player's score is greater than or equal to 21 after hitting
     if (playerScore >= 21) {
         determineWinner();
     }
-    playerScoreElement.innerText = playerScore;
-    dealerScoreElement.innerText = dealerScore;
 }
 
 function stand() {
@@ -125,8 +125,13 @@ function stand() {
         updateDealerCardImages();
         playerScoreElement.innerText = playerScore;
         dealerScoreElement.innerText = dealerScore;
+
+        // Check if dealer's score is greater than or equal to 21
+        if (dealerScore >= 21) {
+            break;
+        }
     }
-    determineWinner(); // Move this outside the if condition
+    determineWinner();
 }
 
 
@@ -197,44 +202,47 @@ function calcPlayerScore() {
 }
 // function to determine winner of the game
 function determineWinner() {
+    if (gameOver) {
+        return;  // If game is already over, don't continue
+    }
+
     let messageElement = document.getElementById('message');
     let playerScoreElement = document.getElementById('player-score');
     let dealerScoreElement = document.getElementById('dealer-score');
     
     playerScoreElement.innerText = playerScore;
     dealerScoreElement.innerText = dealerScore;
-   
-    if (!gameOver) {
-        if (playerScore === 21) {
-            result = 1;
-            message = 'BlackJack! Player wins!';
-            gameOver = true;
-        } else if (playerScore > 21) {
-            result = 2;
-            message = 'Player busts! Dealer wins!';
-            gameOver = true;
-        } else if (dealerScore === 21) {
-            result = 2;
-            message = 'Dealer wins with BlackJack!';
-            gameOver = true;
-        } else if (dealerScore > 21) {
-            result = 1;
-            message = 'Dealer busts! Player wins!';
-            gameOver = true;
-        } else if (playerScore > dealerScore) {
-            result = 1;
-            message = 'Player wins!';
-            gameOver = true;
-        } else if (playerScore < dealerScore) {
-            result = 2;
-            message = 'Dealer wins!';
-            gameOver = true;
-        } else { // This is sufficient to handle the case when playerScore === dealerScore
-            result = 0;
-            message = 'Game not over yet! (Duh)!';
-            gameOver = false;
-        }
-        messageElement.innerText = message;
+
+    if (playerScore === 21) {
+        result = 1;
+        message = 'BlackJack! Player wins!';
+        gameOver = true;
+    } else if (playerScore > 21) {
+        result = 2;
+        message = 'Player busts! Dealer wins!';
+        gameOver = true;
+    } else if (dealerScore === 21) {
+        result = 2;
+        message = 'Dealer wins with BlackJack!';
+        gameOver = true;
+    } else if (dealerScore > 21) {
+        result = 1;
+        message = 'Dealer busts! Player wins!';
+        gameOver = true;
+    } else if (playerScore > dealerScore) {
+        result = 1;
+        message = 'Player wins!';
+        gameOver = true;
+    } else if (playerScore < dealerScore) {
+        result = 2;
+        message = 'Dealer wins!';
+        gameOver = true;
+    } else { // This is sufficient to handle the case when playerScore === dealerScore
+        result = 0;
+        message = 'Tie! Nobody Wins! (Duh)';
+        gameOver = true; // Set the game as over when there is a tie
     }
+
     setStart();
+    messageElement.innerText = message;
 }
