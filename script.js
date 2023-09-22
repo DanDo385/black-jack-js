@@ -106,7 +106,7 @@ function stand() {
 
 function updateDealerCardImages() {
     const dealerCardsElement = document.getElementById('dealer-cards');
-    dealerCardsElement. = '';
+    dealerCardsElement.innerHTML = '';
     for (const card of dealerHand) {
         const dealerCardImage = document.createElement('img');
         dealerCardImage.src = `assets/images/cards/${card}.png`;
@@ -117,7 +117,7 @@ function updateDealerCardImages() {
 
 function updatePlayerCardImages() {
     const playerCardsElement = document.getElementById('player-cards');
-    playerCardsElement. = '';
+    playerCardsElement.innerHTML = '';
     for (const card of playerHand) {
         const playerCardImage = document.createElement('img');
         playerCardImage.src = `assets/images/cards/${card}.png`;
