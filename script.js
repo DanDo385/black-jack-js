@@ -95,15 +95,14 @@ function hit() {
 
 function stand() {
     while (dealerScore < 17) {
-        const card = deck.pop(); // Draw one card from the deck
-        dealerHand.push(card); // Add the card(s) to the dealer's hand
+        const card = deck.pop();
+        dealerHand.push(card);
         calcDealerScore();
-        updateDealerCardImages();    
-        }        
-        if (dealerScore >= 21) {
-        determineWinner();                                                           
-        }
+        updateDealerCardImages();
+    }
+    determineWinner(); // Move this outside the if condition
 }
+
 
 function updateDealerCardImages() {
     const dealerCardsElement = document.getElementById('dealer-cards');
@@ -170,6 +169,13 @@ function calcPlayerScore() {
 }
 // function to determine winner of the game
 function determineWinner() {
+    let messageElement = document.getElementById('message');
+    let playerScoreElement = document.getElementById('player-score');
+    let dealerScoreElement = document.getElementById('dealer-score');
+    
+    playerScoreElement.innerText = playerScore;
+    dealerScoreElement.innerText = dealerScore;
+   
     if (!gameOver) {
         if (playerScore === 21) {
             result = 1;
@@ -201,4 +207,5 @@ function determineWinner() {
             gameOver = false;
         }
     }
+    messageElement.innerText = message;
 }
