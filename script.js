@@ -57,6 +57,7 @@ function checkShuffle() {
         shuffleDeck(deck);
     }
 }
+checkShuffle();
 
 // shuffles deck by uniquely swapping out each card with a random card from 
 // the deck rather than just picking a random card from the desk and risk getting multiple same cards
@@ -75,6 +76,7 @@ shuffleDeck(deck);
 const dealButton = document.getElementById('deal-button');
 const hitButton = document.getElementById('hit-button');
 const standButton = document.getElementById('stand-button');
+const doubleButton = document.getElementById('double-button');  
 
 dealButton.addEventListener('click', function() {
     deal(); // Call the deal() function when the deal button is clicked
@@ -87,10 +89,14 @@ hitButton.addEventListener('click', function() {
 standButton.addEventListener('click', function() {
     stand(); // Call the stand() function when the stand button is clicked
 });
+
+doubleButton.addEventListener('click', function() {
+    stand(); // Call the stand() function when the stand button is clicked
+});
 // create function to deal initial hand
 function deal() {
     gameOver = false; // Set gameOver to false to start a new game
-   
+    
     hitButton.disabled = false;   // Enable the hit and stand buttons
     standButton.disabled = false;
     // Draw two cards for dealer and player
@@ -263,4 +269,11 @@ function determineWinner() {
     messageElement.innerText = message;
     hitButton.disabled = true;
     standButton.disabled = true;
+    if (result == 1) {
+        playerWins++;
+        document.getElementById('player-wins-count').innerText = playerWins;
+    } else if (result == 2) {
+        dealerWins++;
+        document.getElementById('dealer-wins-count').innerText = dealerWins;
+    }
 }
