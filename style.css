@@ -2,7 +2,11 @@ body {
     font-family: 'Roboto Serif', serif;
     text-align: center;
     background-color: limegreen;
-    background-image: 'assets/images/boards/greenboard.png';
+    background-image: url(assets/images/boards/greenboard.png);
+    background-size: 90vw auto;     /* 75vw means 75% of the viewport width */
+    background-repeat: no-repeat;   /* Prevent the image from repeating */
+    background-position: center center;  /* Center the image horizontally and vertically */
+    background-attachment: fixed;   /* This keeps the background fixed while scrolling */
 }
 
 .material-symbols-outlined {
@@ -15,13 +19,20 @@ body {
 
 
 #dealer-cards img {
-    width: 189px;
-    height: 279px;
+    width: 132px;
+    height: 201px;
 }
 
 #player-cards img {
-    width: 189px;
-    height: 279px;
+    width: 132px;
+    height: 201px;
+}
+
+#message {
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    background-size: 90vw auto;
 }
 
 #deal-button {
