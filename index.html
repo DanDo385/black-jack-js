@@ -10,7 +10,13 @@
     </head>
         
     <body>
+        <h1>BlackJack</h1>
         <br><br><br><br><br><br>
+        <input type="number" id="wager-input" placeholder="Enter wager amount">
+        <div id="deck-info">
+            <h3>Deck: <span id="current-deck">1</span></h3>
+            <!-- Add grids for card tracking here -->
+        </div>
         <h2>Dealer: <span id="dealer-score"></span></h2><div id="dealer-cards"><!-- Dealer cards -->></div>   
         <h2>Player: <span id="player-score"></span></h2><div id="player-cards"><!-- Player cards --></div>
 
@@ -20,6 +26,7 @@
         <button id="deal-button">DEAL</button>
         <button id="hit-button">HIT</button>
         <button id="stand-button">STAND</button>
+        <button id="double-down-button" style="display: none;">Double Down</button>
         </span>
 
             <br><br><br>

@@ -86,7 +86,7 @@ function deal() {
     playerScoreElement.innerText = 0;
     dealerScoreElement.innerText = 0;
 
-    messageElement.innerText = 'Good luck! (Even though there is no such thing...';   
+    messageElement.innerText = 'Good luck! (Even though there is no such thing...)';   
     
     dealerHand.push(deck.pop());
     playerHand.push(deck.pop());
