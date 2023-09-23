@@ -2,6 +2,7 @@ body {
     font-family: 'Roboto Serif', serif;
     text-align: center;
     background-color: limegreen;
+    background-image: 'assets/images/boards/greenboard.png';
 }
 
 .material-symbols-outlined {
