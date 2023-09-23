@@ -20,7 +20,12 @@ let messageElement = document.getElementById('message');
 // Initialize score and result message
 let result = 0;
 
+//Initialize the total decks and player and dealer scores
+let totalDecks = 3;
+let playerWins = 0;
+let dealerWins = 0;
 
+//Initialize the board
 window.onload = function() {
     setStart();
 }
@@ -35,13 +40,23 @@ function createDeck() {
     const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10','J', 'Q', 'K', 'A'];
     const suits = ['C', 'D', 'H', 'S'];
     
-    for (const suit of suits) {
-        for (const value of values) {
-            deck.push(`${value}-${suit}`);
+    for (let i = 0; i < totalDecks; i++) {
+        for (const suit of suits) {
+            for (const value of values) {
+                deck.push(`${value}-${suit}`);
+            }
         }
     }
 }
 createDeck();
+
+// Check if 75% of deck has been drawn and shuffle if so
+function checkShuffle() {
+    if (deck.length <= 0.25 * totalDecks * 52) {
+        createDeck();
+        shuffleDeck(deck);
+    }
+}
 
 // shuffles deck by uniquely swapping out each card with a random card from 
 // the deck rather than just picking a random card from the desk and risk getting multiple same cards
