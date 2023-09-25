@@ -154,7 +154,7 @@ function stand() {
             break;
         }
     }
-    determineWinner();
+    setTimeout(determineWinner, 1500);
 }
 
 
