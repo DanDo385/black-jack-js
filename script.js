@@ -33,7 +33,7 @@ window.onload = function() {
 function setStart() {
     updateDealerCardImages();
     updatePlayerCardImages();
-    messageElement.innerText = 'Good luck! (Even though there is no such thing...)';
+    messageElement.innerText = 'Good luck! (Even though there is no such thing)';
 }
 
 function createDeck() {
