@@ -39,11 +39,11 @@ body {
     background-size: 90vw auto;
 }
 
-#deal-button {
-    background-color: red;
-    font-size: 20px; 
-    font-family: 'Roboto', sans-serif; 
-}
+#deal-button::after {
+    content: "\2714"; /* Unicode character for a checkmark symbol */
+    color: green;
+    margin-left: 5px;
+  }
 
 #hit-button {
     background-color: orange;

@@ -91,7 +91,7 @@ standButton.addEventListener('click', function() {
 });
 
 doubleButton.addEventListener('click', function() {
-    stand(); // Call the stand() function when the stand button is clicked
+    double(); // Call the stand() function when the stand button is clicked
 });
 // create function to deal initial hand
 function deal() {
