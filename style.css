@@ -9,6 +9,18 @@ body {
     background-attachment: fixed;   /* This keeps the background fixed while scrolling */
 }
 
+.row {
+    display: flex;  /* Use flexbox to create a row of columns */
+}
+
+.col, .col-5 {
+    flex: 1;       /* By default, columns take up equal width */
+    padding: 1em;  /* Some padding for aesthetics */
+}
+
+.col-5 {
+    flex: 5;       /* This column takes up 5 times the default width */
+}
 
 #dealer-cards img {
     width: 132px;
