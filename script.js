@@ -109,7 +109,7 @@ function deal() {
 
     messageElement.innerText = 'Good luck! (Even though there is no such thing...)';   
     
-    dealerHand.push(deck.pop());
+    dealerHand.push(deck.pop());   
     playerHand.push(deck.pop());
     playerHand.push(deck.pop());
     updateDealerCardImages();
