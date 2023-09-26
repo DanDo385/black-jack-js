@@ -109,7 +109,7 @@ function deal() {
     dealerScoreElement.innerText = 0;
 
     messageElement.innerText = 'Good luck! (Even though there is no such thing...)';   
-    chipWagerElement.innerText = parseInt(chipWagerElement.value) || 0;
+    chipWager = parseInt(chipWagerElement.value) || 0;
     
     dealerHand.push(deck.pop());   
     playerHand.push(deck.pop());
@@ -229,6 +229,7 @@ function determineWinner() {
 
     playerScoreElement.innerText = playerScore;
     dealerScoreElement.innerText = dealerScore;
+    chipCountElement.innerText = chipCount;
 
     if (playerScore === 21) {
         result = 1;
