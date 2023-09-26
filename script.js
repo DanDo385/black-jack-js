@@ -16,6 +16,9 @@ let dealerAceCount = 0;
 let playerScoreElement = document.getElementById('player-score');
 let dealerScoreElement = document.getElementById('dealer-score');
 let messageElement = document.getElementById('message');    
+let chipWagerElement = document.getElementById('chip-wager');
+let chipTotalElement = document.getElementById('chip-total');
+
 
 // Initialize score and result message
 let result = 0;
@@ -24,9 +27,6 @@ let result = 0;
 let totalDecks = 3;
 let playerWins = 0;
 let dealerWins = 0;
-let chipCount = 100;
-let chipWager = 0;
-
 
 
 //Initialize the board
@@ -37,7 +37,7 @@ window.onload = function() {
 function setStart() {
     updateDealerCardImages();
     updatePlayerCardImages();
-    messageElement.innerText = 'Good luck! (Even though there is no such thing)';
+    messageElement.innerText = "Good luck!";
 }
 
 function createDeck() {
@@ -52,6 +52,7 @@ function createDeck() {
         }
     }
 }
+
 createDeck();
 
 // Check if 75% of deck has been drawn and shuffle if so
@@ -71,10 +72,7 @@ function shuffleDeck(deck) {
     [deck[i], deck[j]] = [deck[j], deck[i]];
     }
 }
-shuffleDeck(deck);  
-
-// Initialize variables for buttons and calculations in the game    
-
+shuffleDeck(deck);    
 
 // Add event listeners to the deal, hit, and stand button
 const dealButton = document.getElementById('deal-button');
@@ -102,8 +100,7 @@ function deal() {
     gameOver = false; // Set gameOver to false to start a new game
     
     hitButton.disabled = false;   // Enable the hit and stand buttons
-    standButton.disabled = false;
-    // Draw two cards for dealer and player
+    standButton.disabled = false; // Draw two cards for dealer and player
     dealerHand = []; // Empty the board with the back of the cards and empty array with back of cards to only 
                      // show the cards dealt to the dealer and player
     playerHand = [];
@@ -160,7 +157,6 @@ function stand() {
     }
     setTimeout(determineWinner, 1500);
 }
-
 
 function updateDealerCardImages() {
     const dealerCardsElement = document.getElementById('dealer-cards');
@@ -224,7 +220,6 @@ function calcPlayerScore() {
         playerAceCount-- 
     }
     return playerScore;
-    
 }
 // function to determine winner of the game
 function determineWinner() {
@@ -232,10 +227,6 @@ function determineWinner() {
         return;  // If game is already over, don't continue
     }
 
-    let messageElement = document.getElementById('message');
-    let playerScoreElement = document.getElementById('player-score');
-    let dealerScoreElement = document.getElementById('dealer-score');
-    
     playerScoreElement.innerText = playerScore;
     dealerScoreElement.innerText = dealerScore;
 
@@ -273,12 +264,16 @@ function determineWinner() {
     messageElement.innerText = message;
     hitButton.disabled = true;
     standButton.disabled = true;
+
     if (result == 1) {
         playerWins++;
-        playerChipCount +- chipWager;
+        chipCount += chipWager;  // Deduct chipWager from chipCount when player wins
+        document.getElementById('chip-total').innerText = chipCount;  // Update chip-total display
         document.getElementById('player-wins-count').innerText = playerWins;
     } else if (result == 2) {
         dealerWins++;
+        chipCount -= chipWager;  // Increment chipCount when dealer wins (assuming this is the desired logic)
+        chipTotalElement.innerText = chipCount;
         document.getElementById('dealer-wins-count').innerText = dealerWins;
     }
 }
