@@ -227,9 +227,7 @@ function determineWinner() {
         return;  // If game is already over, don't continue
     }
 
-    playerScoreElement.innerText = playerScore;
-    dealerScoreElement.innerText = dealerScore;
-    chipCountElement.innerText = chipCount;
+
 
     if (playerScore === 21) {
         result = 1;
@@ -265,7 +263,10 @@ function determineWinner() {
     messageElement.innerText = message;
     hitButton.disabled = true;
     standButton.disabled = true;
+    calcChipsAndWins();
+}
 
+function calcChipsAndWins() {
     if (result == 1) {
         playerWins++;
         chipCount += chipWager;  // Add chipWager to chipCount when player wins
@@ -277,6 +278,9 @@ function determineWinner() {
         document.getElementById('chip-total').innerText = chipCount;
         document.getElementById('dealer-wins-count').innerText = dealerWins;
     }
-    
 }
+
+
+    
+
 
