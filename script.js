@@ -24,6 +24,10 @@ let result = 0;
 let totalDecks = 3;
 let playerWins = 0;
 let dealerWins = 0;
+let chipCount = 100;
+let chipWager = 0;
+
+
 
 //Initialize the board
 window.onload = function() {
@@ -271,6 +275,7 @@ function determineWinner() {
     standButton.disabled = true;
     if (result == 1) {
         playerWins++;
+        playerChipCount +- chipWager;
         document.getElementById('player-wins-count').innerText = playerWins;
     } else if (result == 2) {
         dealerWins++;
