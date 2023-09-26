@@ -17,8 +17,7 @@ let playerScoreElement = document.getElementById('player-score');
 let dealerScoreElement = document.getElementById('dealer-score');
 let messageElement = document.getElementById('message');    
 let chipWagerElement = document.getElementById('chip-wager');
-let chipTotalElement = document.getElementById('chip-total');
-
+let chipCountElement = document.getElementById('chip-total');
 
 // Initialize score and result message
 let result = 0;
@@ -27,7 +26,8 @@ let result = 0;
 let totalDecks = 3;
 let playerWins = 0;
 let dealerWins = 0;
-
+let chipCount = 100;
+let chipWager = 10;
 
 //Initialize the board
 window.onload = function() {
@@ -109,6 +109,7 @@ function deal() {
     dealerScoreElement.innerText = 0;
 
     messageElement.innerText = 'Good luck! (Even though there is no such thing...)';   
+    chipWagerElement.innerText = parseInt(chipWagerElement.value) || 0;
     
     dealerHand.push(deck.pop());   
     playerHand.push(deck.pop());
@@ -149,7 +150,6 @@ function stand() {
         updateDealerCardImages();
         playerScoreElement.innerText = playerScore;
         dealerScoreElement.innerText = dealerScore;
-
         // Check if dealer's score is greater than or equal to 21
         if (dealerScore >= 21) {
             break;
@@ -267,13 +267,15 @@ function determineWinner() {
 
     if (result == 1) {
         playerWins++;
-        chipCount += chipWager;  // Deduct chipWager from chipCount when player wins
+        chipCount += chipWager;  // Add chipWager to chipCount when player wins
         document.getElementById('chip-total').innerText = chipCount;  // Update chip-total display
         document.getElementById('player-wins-count').innerText = playerWins;
     } else if (result == 2) {
         dealerWins++;
-        chipCount -= chipWager;  // Increment chipCount when dealer wins (assuming this is the desired logic)
-        chipTotalElement.innerText = chipCount;
+        chipCount -= chipWager;  // Subtract chipWager from chipCount when dealer wins
+        document.getElementById('chip-total').innerText = chipCount;
         document.getElementById('dealer-wins-count').innerText = dealerWins;
     }
+    
 }
+
