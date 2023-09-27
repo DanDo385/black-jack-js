@@ -46,7 +46,7 @@ function setStart() {
     standButton.disabled = true;
     doubleButton.disabled = true;
     splitButton.disabled = true;
-    checkShuffle();
+    //checkShuffle();
 }
 
 function createDeck() {
@@ -55,7 +55,7 @@ function createDeck() {
     
     for (const suit of suits) {
         for (const value of values) {
-                deck.push(`${value}-${suit}`);
+            deck.push(`${value}-${suit}`);
         }
     }
 }
@@ -83,7 +83,12 @@ function shuffleDeck(deck) {
 shuffleDeck(deck);    
 
 function getValue(card) {
-    return card.split('-')[0];
+    if (card) {
+        return card.split('-')[0];
+    } else {
+        console.error("Card is undefined!");
+        return ""; // or some other default value or action
+    }
 }
 
 // Add event listeners to the deal, hit, stand, double, and split buttons
@@ -120,11 +125,6 @@ function deal() {
     hitButton.disabled = false;   // Enable the hit and stand buttons
     standButton.disabled = false; 
     doubleButton.disabled = false;
-    if (getValue(playerHand[0]) === getValue(playerHand[1])) {
-        splitButton.disabled = false;
-    } else {
-        splitButton.disabled = true;
-    }
     
     // Draw two cards for dealer and player
     dealerHand = []; // Empty the board with the back of the cards and empty array with back of cards to only 
@@ -140,6 +140,12 @@ function deal() {
     dealerHand.push(deck.pop());   
     playerHand.push(deck.pop());
     
+    if (getValue(playerHand[0]) === getValue(playerHand[1])) {  // Move this block here
+        splitButton.disabled = false;
+    } else {
+        splitButton.disabled = true;
+    }
+
     updateDealerCardImages();
     updatePlayerCardImages();
     calcPlayerScore();
@@ -150,6 +156,7 @@ function deal() {
     playerScoreElement.innerText = playerScore;
     dealerScoreElement.innerText = dealerScore;
 }
+
 
 function hit() {
     doubleButton.disabled = true;
