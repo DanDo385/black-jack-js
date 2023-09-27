@@ -159,6 +159,12 @@ function stand() {
     setTimeout(determineWinner, 1500);
 }
 
+function double() {
+    chipWager *= 2;
+    hit();
+    stand();
+}
+
 function updateDealerCardImages() {
     const dealerCardsElement = document.getElementById('dealer-cards');
     dealerCardsElement.innerHTML = '';
