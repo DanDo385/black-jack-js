@@ -46,6 +46,7 @@ function setStart() {
     standButton.disabled = true;
     doubleButton.disabled = true;
     splitButton.disabled = true;
+    checkShuffle();
 }
 
 function createDeck() {
@@ -64,6 +65,7 @@ createDeck();
 // Check if 75% of deck has been drawn and shuffle if so
 function checkShuffle() {
     if (deck.length/52 <= 0.25) {
+        alert('Shuffling...');
         createDeck();
         shuffleDeck(deck);
     }
@@ -79,6 +81,10 @@ function shuffleDeck(deck) {
     }
 }
 shuffleDeck(deck);    
+
+function getValue(card) {
+    return card.split('-')[0];
+}
 
 // Add event listeners to the deal, hit, stand, double, and split buttons
 const dealButton = document.getElementById('deal-button');
@@ -114,8 +120,11 @@ function deal() {
     hitButton.disabled = false;   // Enable the hit and stand buttons
     standButton.disabled = false; 
     doubleButton.disabled = false;
-
-
+    if (getValue(playerHand[0]) === getValue(playerHand[1])) {
+        splitButton.disabled = false;
+    } else {
+        splitButton.disabled = true;
+    }
     
     // Draw two cards for dealer and player
     dealerHand = []; // Empty the board with the back of the cards and empty array with back of cards to only 
@@ -125,11 +134,12 @@ function deal() {
     playerScoreElement.innerText = 0;
     dealerScoreElement.innerText = 0;
 
-    messageElement.innerText = 'Good luck! (Even though there is no such thing...)';   
+    messageElement.innerText = 'Good luck!';   
     chipWager = parseInt(chipWagerElement.value) || 0;
+    playerHand.push(deck.pop());
     dealerHand.push(deck.pop());   
     playerHand.push(deck.pop());
-    playerHand.push(deck.pop());
+    
     updateDealerCardImages();
     updatePlayerCardImages();
     calcPlayerScore();
@@ -182,6 +192,7 @@ function double() {
     hit();
     stand();
 }
+
 
 function updateDealerCardImages() {
     const dealerCardsElement = document.getElementById('dealer-cards');
@@ -248,25 +259,7 @@ function calcPlayerScore() {
     return playerScore;
 }
 
-function calcPlayerSplitScore() {
-    playerSplitScore = 0;
-    for (const card of playerSplitHand) {
-        const value = card.charAt(0);
-        if (value === 'A') { playerSplitAceCount++;
-        playerSplitScore += 11; // Assume Ace as 11 initially 
-        } else if (value === 'K' || value === 'Q' || value === 'J' || value === '1') {
-        playerSplitScore += 10; // Face cards are worth 10 points
-        } else {
-        playerSplitScore += parseInt(value); // Other cards are worth their face value
-        }
-    }
-  
-    while (playerSplitScore > 21 && playerSplitAceCount > 0) {
-        playerSplitScore -= 10; // Converts 11 to 1 by subtracting 10 from the score
-        playerSplitAceCount-- 
-    }
-    return playerSplitScore;
-}
+
 // function to determine winner of the game
 function determineWinner() {
     if (gameOver) {
