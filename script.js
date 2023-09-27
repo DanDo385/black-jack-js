@@ -42,6 +42,10 @@ function setStart() {
     updateDealerCardImages();
     updatePlayerCardImages();
     messageElement.innerText = "Good luck!";
+    hitButton.disabled = true;
+    standButton.disabled = true;
+    doubleButton.disabled = true;
+    splitButton.disabled = true;
 }
 
 function createDeck() {
@@ -108,7 +112,12 @@ function deal() {
     gameOver = false; // Set gameOver to false to start a new game
     
     hitButton.disabled = false;   // Enable the hit and stand buttons
-    standButton.disabled = false; // Draw two cards for dealer and player
+    standButton.disabled = false; 
+    doubleButton.disabled = false;
+
+
+    
+    // Draw two cards for dealer and player
     dealerHand = []; // Empty the board with the back of the cards and empty array with back of cards to only 
                      // show the cards dealt to the dealer and player
     playerHand = [];
@@ -118,7 +127,6 @@ function deal() {
 
     messageElement.innerText = 'Good luck! (Even though there is no such thing...)';   
     chipWager = parseInt(chipWagerElement.value) || 0;
-    
     dealerHand.push(deck.pop());   
     playerHand.push(deck.pop());
     playerHand.push(deck.pop());
@@ -134,6 +142,7 @@ function deal() {
 }
 
 function hit() {
+    doubleButton.disabled = true;
     const card = deck.pop(); // Draw one card from the deck
     playerHand.push(card); // Add the card to the player's hand
     updatePlayerCardImages();
@@ -150,6 +159,8 @@ function hit() {
 }
 
 function stand() {
+    doubleButton.disabled = true;
+    
     while (dealerScore < 17) {
         const card = deck.pop();
         dealerHand.push(card);
@@ -185,16 +196,6 @@ function updateDealerCardImages() {
 
 function updatePlayerCardImages() {
     const playerCardsElement = document.getElementById('player-cards');
-    playerCardsElement.innerHTML = '';
-    for (const card of playerHand) {
-        const playerCardImage = document.createElement('img');
-        playerCardImage.src = `assets/images/cards/${card}.png`;
-        playerCardImage.alt = card;
-        playerCardsElement.appendChild(playerCardImage);
-    }
-}
-function updatePlayerSplitCardImages() {
-    const playerSplitCardsElement = document.getElementById('player-cards');
     playerCardsElement.innerHTML = '';
     for (const card of playerHand) {
         const playerCardImage = document.createElement('img');
@@ -271,8 +272,6 @@ function determineWinner() {
     if (gameOver) {
         return;  // If game is already over, don't continue
     }
-
-
 
     if (playerScore === 21) {
         result = 1;
