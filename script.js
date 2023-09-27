@@ -9,6 +9,7 @@ let playerScore = 0;
 let playerScoreSplit = 0;
 let dealerScore = 0;
 let gameOver = false;
+let split = false;
 
 // Initialize ace counts for dealer and player
 let playerAceCount = 0;
@@ -266,51 +267,73 @@ function calcPlayerScore() {
     return playerScore;
 }
 
-
+function calcPlayerSplitScore() {
+    playerScoreSplit = 0;
+    for (const card of playerHandSplit) {
+        const value = card.charAt(0);
+        if (value === 'A') {
+            playerAceCountSplit++;
+            playerScoreSplit += 11; // Assume Ace as 11 initially 
+        } else if (value === 'K' || value === 'Q' || value === 'J' || value === '1') {
+            playerScoreSplit += 10; // Face cards are worth 10 points
+        } else {
+            playerScoreSplit += parseInt(value); // Other cards are worth their face value
+        }
+    }
+  
+    while (playerScoreSplit > 21 && playerAceCountSplit > 0) {
+        playerScoreSplit -= 10; // Converts 11 to 1 by subtracting 10 from the score
+        playerAceCountSplit--; 
+    }
+    return playerScoreSplit;
+}
 // function to determine winner of the game
 function determineWinner() {
     if (gameOver) {
         return;  // If game is already over, don't continue
     }
-
-    if (playerScore === 21) {
-        result = 1;
-        message = 'BlackJack! Player wins!';
-        chipWager *= 1.5;  //Blackjack pays 3:2 
-        gameOver = true;
-    } else if (playerScore > 21) {
-        result = 2;
-        message = 'Player busts! Dealer wins!';
-        gameOver = true;
-    } else if (dealerScore === 21) {
-        result = 2;
-        message = 'Dealer wins with BlackJack!';
-        gameOver = true;
-    } else if (dealerScore > 21) {
-        result = 1;
-        message = 'Dealer busts! Player wins!';
-        gameOver = true;
-    } else if (playerScore > dealerScore) {
-        result = 1;
-        message = 'Player wins!';
-        gameOver = true;
-    } else if (playerScore < dealerScore) {
-        result = 2;
-        message = 'Dealer wins!';
-        gameOver = true;
-    } else { // This is sufficient to handle the case when playerScore === dealerScore
-        result = 0;
-        message = 'Tie! Nobody Wins! (Duh)';
-        gameOver = true; // Set the game as over when there is a tie
-    }
-
+        if (!split) {
+            if (playerScore === 21) {
+                result = 1;
+                message = 'BlackJack! Player wins!';
+                chipWager *= 1.5;  //Blackjack pays 3:2 
+                gameOver = true;
+            } else if (playerScore > 21) {
+                result = 2;
+                message = 'Player busts! Dealer wins!';
+                gameOver = true;
+            } else if (dealerScore === 21) {
+                result = 2;
+                message = 'Dealer wins with BlackJack!';
+                gameOver = true;
+            } else if (dealerScore > 21) {
+                result = 1;
+                message = 'Dealer busts! Player wins!';
+                gameOver = true;
+            } else if (playerScore > dealerScore) {
+                result = 1;
+                message = 'Player wins!';
+                gameOver = true;
+            } else if (playerScore < dealerScore) {
+                result = 2;
+                message = 'Dealer wins!';
+                gameOver = true;
+            } else { // This is sufficient to handle the case when playerScore === dealerScore
+                result = 0;
+                message = 'Tie! Nobody Wins! (Duh)';
+                gameOver = true; // Set the game as over when there is a tie
+            }
+        else if (split=true) {
+            determineWinnerSplit();
+            }
+        }
     setStart();
     messageElement.innerText = message;
     hitButton.disabled = true;
     standButton.disabled = true;
     calcChipsAndWins();
-    checkShuffle();
 }
+
 
 function calcChipsAndWins() {
     if (result == 1) {
