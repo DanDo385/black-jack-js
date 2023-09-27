@@ -1,5 +1,6 @@
-// Initialize the deck of cards and shuffle the deck
+// Initialize the deck [] array and totalDecks variable
 let deck = [];
+let totalDecks = 3;
 
 // Initialize variables for the game
 let playerHand = ["BACK"];
