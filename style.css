@@ -39,15 +39,18 @@ body {
     background-size: 90vw auto;
 }
 
+
 #deal-button::after {
     content: "\2714"; /* Unicode character for a checkmark symbol */
     color: green;
     margin-left: 5px;
+    font-family: 'Skranji', cursive;
+    font-size: medium;
   }
 
 #hit-button {
     background-color: green;
-    font-size: 20px;
+    font-size: medium;
     font-family: 'Arial', sans-serif;
 }
 

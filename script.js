@@ -1,9 +1,9 @@
 // Initialize the deck [] array and totalDecks variable
 let deck = [];
-let totalDecks = 3;
 
 // Initialize variables for the game
 let playerHand = ["BACK"];
+let playerHandSplit = [];
 let dealerHand = ["BACK"];
 let playerScore = 0;
 let playerScoreSplit = 0;
@@ -14,22 +14,22 @@ let gameOver = false;
 let playerAceCount = 0;
 let dealerAceCount = 0;
 
-// Initialize playerScore and dealerScore elements so not to repeat code
-let playerScoreElement = document.getElementById('player-score');
-let dealerScoreElement = document.getElementById('dealer-score');
-let messageElement = document.getElementById('message');    
-let chipWagerElement = document.getElementById('chip-wager');
-let chipCountElement = document.getElementById('chip-total');
-
 // Initialize score and result message
 let result = 0;
 
-//Initialize the total decks and player and dealer scores
-let totalDecks = 3;
+//Initialize playerWins, dealerWins, and chip wager variables
+
 let playerWins = 0;
 let dealerWins = 0;
 let chipCount = 100;
 let chipWager = 10;
+
+// Intialize variables for the HTML elements
+const playerScoreElement = document.getElementById('player-score');
+const dealerScoreElement = document.getElementById('dealer-score');
+const messageElement = document.getElementById('message');    
+const chipWagerElement = document.getElementById('chip-wager');
+const chipCountElement = document.getElementById('chip-total');
 
 //Initialize the board
 window.onload = function() {
@@ -46,11 +46,9 @@ function createDeck() {
     const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10','J', 'Q', 'K', 'A'];
     const suits = ['C', 'D', 'H', 'S'];
     
-    for (let i = 0; i < totalDecks; i++) {
-        for (const suit of suits) {
-            for (const value of values) {
+    for (const suit of suits) {
+        for (const value of values) {
                 deck.push(`${value}-${suit}`);
-            }
         }
     }
 }
@@ -59,7 +57,7 @@ createDeck();
 
 // Check if 75% of deck has been drawn and shuffle if so
 function checkShuffle() {
-    if (deck.length <= 0.25 * totalDecks * 52) {
+    if (deck.length/52 <= 0.25) {
         createDeck();
         shuffleDeck(deck);
     }
@@ -272,6 +270,7 @@ function determineWinner() {
     hitButton.disabled = true;
     standButton.disabled = true;
     calcChipsAndWins();
+    checkShuffle();
 }
 
 function calcChipsAndWins() {
