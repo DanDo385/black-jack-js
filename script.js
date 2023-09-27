@@ -5,6 +5,7 @@ let deck = [];
 let playerHand = ["BACK"];
 let dealerHand = ["BACK"];
 let playerScore = 0;
+let playerScoreSplit = 0;
 let dealerScore = 0;
 let gameOver = false;
 
