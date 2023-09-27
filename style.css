@@ -39,25 +39,31 @@ body {
     background-size: 90vw auto;
 }
 
+#deal-button{
+    background-color: yellow;
+    font-family: 'Caveat', cursive;
+    font-style: bold;
+}
 
 #deal-button::after {
     content: "\2714"; /* Unicode character for a checkmark symbol */
     color: green;
-    margin-left: 5px;
-    font-family: 'Skranji', cursive;
-    font-size: medium;
+    font-size: large;
+    font-family: 'Caveat', cursive;
+    font-style: bold;
   }
 
 #hit-button {
     background-color: green;
+    border-radius: 10px;
     font-size: medium;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Skranji', sans-serif;
 }
 
 #stand-button {
     background-color: red;
-    font-size: 20px; 
-    font-family: 'Arial', sans-serif;
+    border-radius: 10px;
+    font-family: 'Dela Gothic One', cursive;
 }
 
 #double-button {

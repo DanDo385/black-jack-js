@@ -5,10 +5,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"> 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto Serif&display=swap">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,200;8..144,400&family=Skranji&display=swap" 
-        rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Skranji&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela Gothic One&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat&display=swap">
+        
         <link rel = "stylesheet" href = "style.css">
         <title>BlackJack</title>
     </head>
@@ -32,8 +32,8 @@
                         <!-- Add grids for card tracking here -->
                     </div>
                     <h2>Dealer: <span id="dealer-score"></span></h2><div id="dealer-cards"><!-- Dealer cards -->></div>   
-                    <h2>Player: <span id="player-score"></span></h2><div id="player-cards"><!-- Player cards --></div>
-        
+                    <h2>Player: <span id="player-score"></span></h2><div id="player-cards"><div id="player-cards-split".<!-- Player cards --></div></div>
+                    <h2>Player Split:</h2>
                         <br><br><br>
         
                     <span id="button-span">
@@ -41,14 +41,13 @@
                     <button id="hit-button">HIT</button>
                     <button id="stand-button">STAND</button>
                     <button id="double-button">DuBLDoWN!</button>
+                    <button id="split-button">...Split?...</button>
                     </span>
     
                 </div>
-                <div class="col"id = "rightColumn">
-                  <span id="card-counting">Card Counting Data:
-                    
+                <div class="col" id = "rightColumn">
+                  <span id="card-counting">Card Counting Data:</span>
                 </div>
-              </div>
             </div>
             
 
