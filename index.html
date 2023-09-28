@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head> <meta charset="utf-8"> <meta name = "viewport" content = "width=device-width, initial-scale=1.0"> 
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"> 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto Serif&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Serif&display=swap">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Skranji&display=swap">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela Gothic One&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat&display=swap">
         
-        <link rel = "stylesheet" href = "style.css">
+        <link rel="stylesheet" href="style.css">
         <title>BlackJack</title>
     </head>
-        
     <body>
        <div class="container">
             <div class="row">
                 <div class="col" id="leftColumn">
                     <h3><input type="number" id="chip-wager" placeholder="Enter chip wager"></h3>
-                    <h3>Chip Total: <span id="chip-total">100</span></h3>
+                    <h3>Chip Total: <span id="chip-total">1000</span></h3>
                     <h3>Dealer Wins: <span id="dealer-wins-count">0</span></h3>
                     <h3>Player Wins: <span id="player-wins-count">0</span></h3>
                 </div>
                 <div class="col-5" id="midColumn">
                     <h1 id="headTitle">BlackJack</h1>
                     <br>
-                    <p id ="message"></p>
+                    <p id="message"></p>
                     
                     <div id="deck-info">
                         <h3>Deck: <span id="current-deck">1</span></h3>
@@ -41,25 +42,23 @@
                     <br>
         
                     <span id="button-span">
-                    <button id="deal-button">DEAL</button>
-                    <button id="hit-button">HIT</button>
-                    <button id="stand-button">STAND</button>
-                    <button id="double-button">DuBLDoWN!</button>
-                    <button id="split-button">...Split?...</button>
+                        <button id="deal-button">DEAL</button>
+                        <button id="hit-button">HIT</button>
+                        <button id="stand-button">STAND</button>
+                        <button id="double-button">DuBLDoWN!</button>
+                        <button id="split-button">...Split?...</button>
                     </span>
-    
                 </div>
-                <div class="col" id = "rightColumn">
+                <div class="col" id="rightColumn">
                 </div>
             </div>
        </div>
-
-    </container>   
         
         <a href="https://www.etsy.com/listing/1469969304/blackjack-strategy-card-sheet-printable" 
-        target="_blank" rel="noopener noreferrer" alt="cheat-link">
-        <h4>Click Here for a Cheat Sheet!</h4></a>
+           target="_blank" rel="noopener noreferrer" alt="cheat-link">
+           <h4>Click Here for a Cheat Sheet!</h4>
+        </a>
 
-        <script src = "script.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>
