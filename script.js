@@ -23,14 +23,15 @@ let result = 0;
 
 let playerWins = 0;
 let dealerWins = 0;
-let chipCount = 100;
+let chipCount = 1000;
 let chipWager = 10;
 
 // Intialize variables for the HTML elements
 const playerScoreElement = document.getElementById('player-score');
 const playerScoreSplitElement = document.getElementById('player-score-split');  
 const dealerScoreElement = document.getElementById('dealer-score');
-const messageElement = document.getElementById('message');    
+const messageElement = document.getElementById('message');  
+const messageSplitElement = document.getElementById('message-split');     
 const chipWagerElement = document.getElementById('chip-wager');
 const chipCountElement = document.getElementById('chip-total');
 
@@ -323,7 +324,38 @@ function determineWinner() {
                 message = 'Tie! Nobody Wins! (Duh)';
                 gameOver = true; // Set the game as over when there is a tie
             }
-        else if (split=true) {
+        else {
+            if (playerScoreSplit === 21) {
+                result = 1;
+                message = 'BlackJack! Player wins!';
+                chipWager *= 1.5;  //Blackjack pays 3:2 
+                gameOver = true;
+            } else if (playerScoreSplit > 21) {
+                result = 2;
+                message = 'Player busts! Dealer wins!';
+                gameOver = true;
+            } else if (dealerScore === 21) {
+                result = 2;
+                message = 'Dealer wins with BlackJack!';
+                gameOver = true;
+            } else if (dealerScore > 21) {
+                result = 1;
+                message = 'Dealer busts! Player wins!';
+                gameOver = true;
+            } else if (playerScoreSplit > dealerScore) {
+                result = 1;
+                message = 'Player wins!';
+                gameOver = true;
+            } else if (playerScoreSplit < dealerScore) {
+                result = 2;
+                message = 'Dealer wins!';
+                gameOver = true;
+            } else { // This is sufficient to handle the case when playerScore === dealerScore
+                result = 0;
+                message = 'Tie! Nobody Wins! (Duh)';
+                gameOver = true; // Set the game as over when there is a tie
+            }
+        }
             determineWinnerSplit();
             }
         }
