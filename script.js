@@ -202,6 +202,15 @@ function double() {
     stand();
 }
 
+function split() {
+    if (playerHand[0].value === playerHand[1].value) {
+        playerHandSplit.push(playerHand.pop()); // Move the second card to the split hand
+        playerHand.push(dealCard(deck));
+        playerHandSplit.push(dealCard(deck));
+        updateDisplay(); // This function will be responsible for updating the card display, which we'll modify soon.
+    }
+}
+
 
 function updateDealerCardImages() {
     const dealerCardsElement = document.getElementById('dealer-cards');
