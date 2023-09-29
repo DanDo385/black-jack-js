@@ -1,7 +1,7 @@
 body {
     font-family: 'Roboto Serif', serif;
     text-align: center;
-    background-color: limegreen;
+    background-color: teal;
     background-image: url(assets/images/boards/tealboard.png);
     background-size: 90vw auto;     /* 75vw means 75% of the viewport width */
     background-repeat: no-repeat;   /* Prevent the image from repeating */
@@ -15,7 +15,8 @@ body {
 
 .col, .col-5 {
     flex: 1;       /* By default, columns take up equal width */
-    padding: 1em;  /* Some padding for aesthetics */
+    padding: 1em; 
+    align-items: center; /* Some padding for aesthetics */
 }
 
 .col-5 {
@@ -32,29 +33,20 @@ body {
     height: 201px;
 }
 
-#players-area {
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping to the next row if needed */
-    justify-content: space-between; /* Space items evenly */
-    align-items: center; /* Vertically center items */
-}
-
-.player-info {
-    flex: 1; /* Each player info section takes equal space */
-    text-align: center;
-    margin: 100px;
-}
-
-#player-cards,
-#player-cards-split {
-    flex: 2; /* Player cards take more space */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center cards horizontally */
+#player-cards-split img {
+    width: 132px;
+    height: 201px;
 }
 
 
 #message {
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    background-size: 90vw auto;
+}
+
+#message-split {
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
     color: white;
@@ -85,6 +77,12 @@ body {
     background-color: green;
     border-radius: 10px;
     font-size: medium;
+    font-family: 'Skranji', sans-serif;
+}
+
+#hit-split-button {
+    background-color: green;
+    border-radius: 10px;
     font-family: 'Skranji', sans-serif;
 }
 

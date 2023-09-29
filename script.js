@@ -4,7 +4,7 @@
 let deck = [], playerHand = ['back'], dealerHand = ['back'], playerHandSplit = [];
 let playerScore = 0, dealerScore = 0, playerScoreSplit = 0;
 let playerAceCount = 0, dealerAceCount = 0, playerAceCountSplit = 0;
-let gameOver = false, isSplit = false, message = '', messageSplit = '';
+let gameOver = false, isSplit = false, result = 0, message = '', messageSplit = '';
 let playerWins = 0, dealerWins = 0, chipCount = 1000, chipWager = 10;
 
 // DOM Elements
@@ -17,39 +17,49 @@ const chipWagerElement = document.getElementById('chip-wager');
 const chipCountElement = document.getElementById('chip-total');
 const dealButton = document.getElementById('deal-button');
 const hitButton = document.getElementById('hit-button');
+const hitSplitButton = document.getElementById('hit-split-button');
 const standButton = document.getElementById('stand-button');
+const standSplitButton = document.getElementById('stand-split-button');
 const doubleButton = document.getElementById('double-button');
+const doubleSplitButton = document.getElementById('double-split-button');
 const splitButton = document.getElementById('split-button');
 
 // Initial setup
 window.onload = setStart();
 
 function setStart() {
+    checkDeckShuffle();
     createDeck();
     shuffleDeck();
     attachEventListeners();
     updateDealerCardImages();
     updatePlayerCardImages();
     messageElement.innerText = "Good luck!";
-    [hitButton, standButton, doubleButton, splitButton].forEach(btn => btn.disabled = true);
+    messageSplitElement.innerText = "";
+    [hitButton, standButton, doubleButton, splitButton, hitSplitButton, standSplitButton].forEach(btn => btn.disabled = true);
 }
 
 function createDeck() {
     const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
     const suits = ['C', 'D', 'H', 'S'];
     deck = values.flatMap(value => suits.map(suit => `${value}-${suit}`));
+    console.log(deck);
 }
 
 function shuffleDeck() {
     for (let i = 0; i < deck.length; i++) {
         const j = Math.floor(Math.random() * deck.length);
         [deck[i], deck[j]] = [deck[j], deck[i]];
+        console.log(deck);
     }
-    if ((deck.length / 25) <= .25) {  // Check for reshuffle
+}
+    
+function checkDeckShuffle() {
+        if ((deck.length / 52) <= .25) {  // Check for reshuffle
         alert('Shuffling...');
         createDeck();
         shuffleDeck();
-    }
+        }
 }
 
 function attachEventListeners() {
@@ -58,6 +68,8 @@ function attachEventListeners() {
     standButton.addEventListener('click', stand);
     doubleButton.addEventListener('click', double);
     splitButton.addEventListener('click', split);
+    hitSplitButton.addEventListener('click', hitSplit);
+    standSplitButton.addEventListener('click', standSplit);
 }
 
 // Function to get the value of a card
@@ -65,7 +77,7 @@ function getValue(card) {
     const value = card.split('-')[0];
     if (value === 'A') {
         return 'A'; // Ace can be 1 or 11, and it will be handled later
-    } else if (['K', 'Q', 'J'].includes(value) || parseInt(value) >= 10) {
+    } else if (['K', 'Q', 'J', '10'].includes(value)) {
         return '10'; // Face cards and 10s are worth 10 points
     } else {
         return value; // Other cards are worth their face value
@@ -78,15 +90,15 @@ function deal() {
     gameOver = false; // Set gameOver to false to start a new game
     
     // Draw two cards for the player and one card for the dealer
-    dealerHand = []; // Empty the board with the back of the cards and empty array with back of cards to only 
+    dealerHand = []; // Empty the board with the back of the cards and empty array so after deal, only 
                      // show the cards dealt to the dealer and player
-    playerHand = [];
+                     playerHand = [];
     
     playerScoreElement.innerText = 0;
     dealerScoreElement.innerText = 0;
     playerScoreSplitElement.innerText = 0;
     messageSplitElement.innerText = 'Good luck!';   
-    chipWager = parseInt(chipWagerElement.value) || 0;
+    chipWager = parseInt(chipWagerElement.value) || 10;
     playerHand.push(deck.pop());
     dealerHand.push(deck.pop());   
     playerHand.push(deck.pop());
@@ -94,23 +106,17 @@ function deal() {
     hitButton.disabled = false;   // Enable the hit and stand buttons
     standButton.disabled = false; 
     doubleButton.disabled = false;
+    dealButton.disabled = true;
 
-    if (getValue(playerHand[0]) === getValue(playerHand[1])) {
-        isSplit = true;
-        playerHandSplit.push(playerHand.pop());
-        updatePlayerCardImages();
-        updatePlayerCardSplitImages();
-        calcPlayerScore();
-        calcPlayerSplitScore();
-    }
-    
     updateDealerCardImages();
     updatePlayerCardImages();
     calcPlayerScore();
     calcDealerScore();
+    
     if (playerScore === 21) {   
         determineWinner();
     }   
+    
     playerScoreElement.innerText = playerScore;
     dealerScoreElement.innerText = dealerScore;
 }
@@ -166,10 +172,26 @@ function split() {
         updatePlayerCardSplitImages();
         calcPlayerScore();
         calcPlayerSplitScore();
+        splitButton.disabled = true;
     }
 }
-    
 
+function hitSplit() {
+    doubleButton.disabled = true;
+    const card = deck.pop(); // Draw one card from the deck
+    playerHandSplit.push(card); // Add the card to the player's hand
+    updatePlayerCardSplitImages();
+    calcPlayerSplitScore();
+    calcDealerScore();
+    console.log(playerScoreSplit);
+    playerScoreSplitElement.innerText = playerScoreSplit;
+    dealerScoreElement.innerText = dealerScore;
+    if (playerScoreSplit >= 21) {
+        determineWinner();
+    }
+}
+
+    
 function updateDealerCardImages() {
     const dealerCardsElement = document.getElementById('dealer-cards');
     dealerCardsElement.innerHTML = '';
