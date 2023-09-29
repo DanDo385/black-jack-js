@@ -92,7 +92,19 @@ body {
     font-family: 'Dela Gothic One', cursive;
 }
 
+#stand-split-button {
+    background-color: red;
+    border-radius: 10px;
+    font-family: 'Dela Gothic One', cursive;
+}
+
 #double-button {
+    background-color: aqua;
+    font-size: 15px; 
+    font-family: 'Roboto', sans-serif; 
+}
+
+#double-split-button {
     background-color: aqua;
     font-size: 15px; 
     font-family: 'Roboto', sans-serif; 

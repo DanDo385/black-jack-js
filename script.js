@@ -1,7 +1,7 @@
 // Blackjack Game
 
 // Variables
-let deck = [], playerHand = ['back'], dealerHand = ['back'], playerHandSplit = [];
+let deck = [], playerHand = [], dealerHand = [], playerHandSplit = [];
 let playerScore = 0, dealerScore = 0, playerScoreSplit = 0;
 let playerAceCount = 0, dealerAceCount = 0, playerAceCountSplit = 0;
 let gameOver = false, isSplit = false, result = 0, message = '', messageSplit = '';
@@ -15,6 +15,7 @@ const messageElement = document.getElementById('message');
 const messageSplitElement = document.getElementById('message-split');
 const chipWagerElement = document.getElementById('chip-wager');
 const chipCountElement = document.getElementById('chip-total');
+
 const dealButton = document.getElementById('deal-button');
 const hitButton = document.getElementById('hit-button');
 const hitSplitButton = document.getElementById('hit-split-button');
@@ -28,6 +29,8 @@ const splitButton = document.getElementById('split-button');
 window.onload = setStart();
 
 function setStart() {
+    dealerHand = ["BACK"];
+    playerHand = ["BACK"];
     checkDeckShuffle();
     createDeck();
     shuffleDeck();
@@ -36,7 +39,7 @@ function setStart() {
     updatePlayerCardImages();
     messageElement.innerText = "Good luck!";
     messageSplitElement.innerText = "";
-    [hitButton, standButton, doubleButton, splitButton, hitSplitButton, standSplitButton].forEach(btn => btn.disabled = true);
+    [hitButton, standButton, doubleButton, splitButton, hitSplitButton, standSplitButton, doubleSplitButton].forEach(btn => btn.disabled = true);
 }
 
 function createDeck() {
@@ -77,13 +80,12 @@ function getValue(card) {
     const value = card.split('-')[0];
     if (value === 'A') {
         return 'A'; // Ace can be 1 or 11, and it will be handled later
-    } else if (['K', 'Q', 'J', '10'].includes(value)) {
+    } else if (['K', 'Q', 'J'].includes(value)) {
         return '10'; // Face cards and 10s are worth 10 points
     } else {
         return value; // Other cards are worth their face value
     }
 }
-
 
 // create function to deal initial hand
 function deal() {
@@ -91,8 +93,8 @@ function deal() {
     
     // Draw two cards for the player and one card for the dealer
     dealerHand = []; // Empty the board with the back of the cards and empty array so after deal, only 
-                     // show the cards dealt to the dealer and player
-                     playerHand = [];
+    playerHand = []; // show the cards dealt to the dealer and player
+                     
     
     playerScoreElement.innerText = 0;
     dealerScoreElement.innerText = 0;
@@ -113,7 +115,7 @@ function deal() {
     calcPlayerScore();
     calcDealerScore();
     
-    if (playerScore === 21) {   
+    if (playerScore >= 21) {   
         determineWinner();
     }   
     
@@ -129,19 +131,19 @@ function hit() {
     updatePlayerCardImages();
     calcPlayerScore();
     calcDealerScore();
-    console.log(playerScore);
-    playerScoreElement.innerText = playerScore;
-    dealerScoreElement.innerText = dealerScore;
-
+    //console.log(playerScore); <-- used for testing
+    
     // Check if player's score is greater than or equal to 21 after hitting
     if (playerScore >= 21) {
         determineWinner();
     }
+    playerScoreElement.innerText = playerScore;
+    dealerScoreElement.innerText = dealerScore;
 }
 
 function stand() {
     doubleButton.disabled = true;
-    
+    dealButton.disabled = false;
     while (dealerScore < 17) {
         const card = deck.pop();
         dealerHand.push(card);
@@ -152,10 +154,10 @@ function stand() {
         dealerScoreElement.innerText = dealerScore;
         // Check if dealer's score is greater than or equal to 21
         if (dealerScore >= 21) {
-            break;
+            determineWinner();
         }
     }
-    setTimeout(determineWinner, 900);
+   
 }
 
 function double() {
@@ -164,9 +166,12 @@ function double() {
     stand();
 }
 
+
+
 function split() {
+    messageSplitElement.innerText = 'We have a split hand!';
+    isSplit = true;
     if (getValue(playerHand[0]) === getValue(playerHand[1])) {
-        isSplit = true;
         playerHandSplit.push(playerHand.pop());
         updatePlayerCardImages();
         updatePlayerCardSplitImages();
@@ -177,21 +182,43 @@ function split() {
 }
 
 function hitSplit() {
-    doubleButton.disabled = true;
+    doubleSplitButton.disabled = true;
     const card = deck.pop(); // Draw one card from the deck
     playerHandSplit.push(card); // Add the card to the player's hand
     updatePlayerCardSplitImages();
     calcPlayerSplitScore();
     calcDealerScore();
-    console.log(playerScoreSplit);
+    // console.log(playerScoreSplit); 
     playerScoreSplitElement.innerText = playerScoreSplit;
     dealerScoreElement.innerText = dealerScore;
     if (playerScoreSplit >= 21) {
-        determineWinner();
+        determineSplitWinner
     }
 }
 
-    
+function standSplit() {
+    doubleButton.disabled = true;   
+    while (dealerScore < 17) {
+        const card = deck.pop();
+        dealerHand.push(card);
+        calcDealerScore();
+        calcPlayerSplitScore();
+        updateDealerCardImages();
+        playerScoreSplitElement.innerText = playerScoreSplit;
+        dealerScoreElement.innerText = dealerScore;
+        if (dealerScore >= 21) {    
+            break;
+        }
+    setTimeout(determineWinner, 900);   
+    }
+}
+
+function doubleSplit() {
+    chipWager *= 2;
+    hitSplit();
+    standSplit();
+}
+
 function updateDealerCardImages() {
     const dealerCardsElement = document.getElementById('dealer-cards');
     dealerCardsElement.innerHTML = '';
@@ -292,10 +319,8 @@ function calcPlayerSplitScore() {
 // function to determine winner of the game
 function determineWinner() {
     if (gameOver) {
-        return;
+        return; //Return to the hand if no winner found to keep playing
     }
-
-    if (!isSplit) {
         // Determine the winner for the main hand
         if (playerScore === 21) {
             result = 1;
@@ -324,50 +349,59 @@ function determineWinner() {
             gameOver = true;
         } else {
             result = 0;
-            message = 'Tie! Nobody Wins! (Duh)';
+            message = 'Tie! Nobody Wins!';
             gameOver = true;
         }
-    } else {
-        // Determine the winner for the split hand
-        if (playerScoreSplit === 21) {
-            result = 1;
-            message = 'BlackJack! Player wins the split hand!';
-            chipWager *= 1.5;
-            gameOver = true;
-        } else if (playerScoreSplit > 21) {
-            result = 2;
-            message = 'Player busts on the split hand! Dealer wins!';
-            gameOver = true;
-        } else if (dealerScore === 21) {
-            result = 2;
-            message = 'Dealer wins the split hand with BlackJack!';
-            gameOver = true;
-        } else if (dealerScore > 21) {
-            result = 1;
-            message = 'Dealer busts on the split hand! Player wins!';
-            gameOver = true;
-        } else if (playerScoreSplit > dealerScore) {
-            result = 1;
-            message = 'Player wins the split hand!';
-            gameOver = true;
-        } else if (playerScoreSplit < dealerScore) {
-            result = 2;
-            message = 'Dealer wins the split hand!';
-            gameOver = true;
-        } else {
-            result = 0;
-            message = 'Tie on the split hand! Nobody wins!';
-            gameOver = true;
+        
+        hitButton.disabled = true;
+        standButton.disabled = true;
+        calcChipsAndWins();
+        if (isSplit = true) {
+            determineSplitWinner();
         }
-    }
-
-    setStart();
-    messageElement.innerText = message;
-    hitButton.disabled = true;
-    standButton.disabled = true;
-    calcChipsAndWins();
+        if (isSplit = false) {
+            setStart();
+        }
+        messageElement.innerText = message;
 }
 
+function determineSplitWinner() {
+        // Determine the winner for the split hand
+    if (playerScoreSplit === 21) {
+        result = 1;
+        messageSplit = 'BlackJack! Player wins the split hand!';
+        chipWager *= 1.5;
+        gameOver = true;
+    } else if (playerScoreSplit > 21) {
+        result = 2;
+        messageSplit = 'Player busts on the split hand! Dealer wins!';
+        gameOver = true;
+    } else if (dealerScore === 21) {
+        result = 2;
+        messageSplit = 'Dealer wins the split hand with BlackJack!';
+        gameOver = true;
+    } else if (dealerScore > 21) {
+        result = 1;
+        messageSplit = 'Dealer busts on the split hand! Player wins!';
+        gameOver = true;
+    } else if (playerScoreSplit > dealerScore) {
+        result = 1;
+        messageSplit = 'Player wins the split hand!';
+        gameOver = true;
+    } else if (playerScoreSplit < dealerScore) {
+        result = 2;
+        messageSplit = 'Dealer wins the split hand!';
+        gameOver = true;
+    } else {
+        result = 0;
+        messageSplit = 'Tie on the split hand! Nobody wins!';
+        gameOver = true;
+    }
+    messageSplitElement.innerText = messageSplit;
+    hitSplitButton.disabled = true;
+    standSplitButton.disabled = true;
+    calcChipsAndWins();
+}   
 
 function calcChipsAndWins() {
     if (result == 1) {
