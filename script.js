@@ -60,7 +60,7 @@ function attachEventListeners() {
     hitButton.addEventListener('click', hit);
     standButton.addEventListener('click', stand);
     doubleButton.addEventListener('click', double);
-    splitButton.addEventListener('click', splitHand);
+    splitButton.addEventListener('click', split);
 }
 
 // create function to deal initial hand
