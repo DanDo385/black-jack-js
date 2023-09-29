@@ -96,11 +96,14 @@ function deal() {
     doubleButton.disabled = false;
 
     if (getValue(playerHand[0]) === getValue(playerHand[1])) {
-        splitButton.disabled = false;
-    } else {
-        splitButton.disabled = true;
+        isSplit = true;
+        playerHandSplit.push(playerHand.pop());
+        updatePlayerCardImages();
+        updatePlayerCardSplitImages();
+        calcPlayerScore();
+        calcPlayerSplitScore();
     }
-
+    
     updateDealerCardImages();
     updatePlayerCardImages();
     calcPlayerScore();
@@ -110,7 +113,6 @@ function deal() {
     }   
     playerScoreElement.innerText = playerScore;
     dealerScoreElement.innerText = dealerScore;
-    playerScoreSplitElement.innerText = playerScoreSplit;   
 }
 
 
@@ -158,15 +160,15 @@ function double() {
 
 function split() {
     if (getValue(playerHand[0]) === getValue(playerHand[1])) {
-        split = true;
-        playerHand = playerHand[0];
-        playerHandSplit = playerHand[1]
+        isSplit = true;
+        playerHandSplit.push(playerHand.pop());
         updatePlayerCardImages();
         updatePlayerCardSplitImages();
         calcPlayerScore();
         calcPlayerSplitScore();
     }
 }
+    
 
 function updateDealerCardImages() {
     const dealerCardsElement = document.getElementById('dealer-cards');
@@ -197,7 +199,7 @@ function updatePlayerCardSplitImages() {
         const playerCardSplitImage = document.createElement('img');
         playerCardSplitImage.src = `assets/images/cards/${card}.png`;
         playerCardSplitImage.alt = card;
-        playerCardsSplitElement.appendChild(playerCardImageSplit);
+        playerCardsSplitElement.appendChild(playerCardSplitImage);
     }
 }
 // function to calculate dealer score

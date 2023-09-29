@@ -32,6 +32,28 @@ body {
     height: 201px;
 }
 
+#players-area {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next row if needed */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center; /* Vertically center items */
+}
+
+.player-info {
+    flex: 1; /* Each player info section takes equal space */
+    text-align: center;
+    margin: 100px;
+}
+
+#player-cards,
+#player-cards-split {
+    flex: 2; /* Player cards take more space */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center cards horizontally */
+}
+
+
 #message {
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
