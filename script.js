@@ -28,6 +28,7 @@ function initializeGame() {
     shuffleDeck();
     setStart();
     attachEventListeners();
+
 }
 
 function createDeck() {
@@ -67,9 +68,7 @@ function attachEventListeners() {
 function deal() {
     gameOver = false; // Set gameOver to false to start a new game
     
-    hitButton.disabled = false;   // Enable the hit and stand buttons
-    standButton.disabled = false; 
-    doubleButton.disabled = false;
+    
     
     // Draw two cards for dealer and player
     dealerHand = []; // Empty the board with the back of the cards and empty array with back of cards to only 
@@ -78,13 +77,18 @@ function deal() {
     
     playerScoreElement.innerText = 0;
     dealerScoreElement.innerText = 0;
-
-    messageElement.innerText = 'Good luck!';   
+    playerScoreSplitElement.innerText = 0;
+    messageSplitElement.innerText = 'Good luck!'; 
+    messageSplitElement.innerText = 'Good luck!';   
     chipWager = parseInt(chipWagerElement.value) || 0;
     playerHand.push(deck.pop());
     dealerHand.push(deck.pop());   
     playerHand.push(deck.pop());
     
+    hitButton.disabled = false;   // Enable the hit and stand buttons
+    standButton.disabled = false; 
+    doubleButton.disabled = false;
+
     if (getValue(playerHand[0]) === getValue(playerHand[1])) {
         splitButton.disabled = false;
     } else {
