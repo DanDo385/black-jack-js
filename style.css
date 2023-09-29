@@ -39,6 +39,12 @@ body {
     background-size: 90vw auto;
 }
 
+#cheat-sheet {
+    width: 402px;
+    height: 600px;
+    justify-content: center;
+}
+
 #deal-button{
     background-color: yellow;
     font-family: 'Caveat', cursive;
