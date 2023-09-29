@@ -104,6 +104,7 @@ function deal() {
     }   
     playerScoreElement.innerText = playerScore;
     dealerScoreElement.innerText = dealerScore;
+    playerScoreSplitElement.innerText = playerScoreSplit;   
 }
 
 
@@ -140,7 +141,7 @@ function stand() {
             break;
         }
     }
-    setTimeout(determineWinner, 1500);
+    setTimeout(determineWinner, 900);
 }
 
 function double() {
@@ -149,15 +150,16 @@ function double() {
     stand();
 }
 
-function splitHand() {
+function split() {
     if (getValue(playerHand[0]) === getValue(playerHand[1])) {
         split = true;
-        playerHandSplit.push(playerHand.pop()); // Move the second card to the split hand
-        playerHand.push(deck.pop());
-        playerHandSplit.push(deck.pop());
+        playerHand = playerHand[0];
+        playerHandSplit = playerHand[1]
         updatePlayerCardImages();
+        updatePlayerCardSplitImages();
         calcPlayerScore();
         calcPlayerSplitScore();
+
     }
 }
 
