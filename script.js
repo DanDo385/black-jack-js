@@ -1,7 +1,7 @@
 // Blackjack Game
 
 // Variables
-let deck = [], playerHand = [], dealerHand = [], playerHandSplit = [];
+let deck = [], playerHand = ['back'], dealerHand = ['back'], playerHandSplit = [];
 let playerScore = 0, dealerScore = 0, playerScoreSplit = 0;
 let playerAceCount = 0, dealerAceCount = 0, playerAceCountSplit = 0;
 let gameOver = false, split = false, result = 0;
@@ -41,7 +41,7 @@ function shuffleDeck() {
         const j = Math.floor(Math.random() * deck.length);
         [deck[i], deck[j]] = [deck[j], deck[i]];
     }
-    if (deck.length <= 0.25 * 52) {  // Check for reshuffle
+    if ((deck.length / 25) <= .25) {  // Check for reshuffle
         alert('Shuffling...');
         createDeck();
         shuffleDeck();
@@ -179,6 +179,16 @@ function updatePlayerCardImages() {
     }
 }
 
+function updatePlayerCardSplitImages() {
+    const playerCardsSplitElement = document.getElementById('player-cards-split');
+    playerCardsSplitElement.innerHTML = '';
+    for (const card of playerHandSplit) {
+        const playerCardSplitImage = document.createElement('img');
+        playerCardSplitImage.src = `assets/images/cards/${card}.png`;
+        playerCardSplitImage.alt = card;
+        playerCardsSplitElement.appendChild(playerCardImageSplit);
+    }
+}
 // function to calculate dealer score
 function calcDealerScore() {
     dealerScore = 0;
