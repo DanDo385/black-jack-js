@@ -65,21 +65,21 @@ body {
 }
 
 #player-score {
-    font-size: 30px;
+    font-size: 24px;
     font-family: 'Roboto', sans-serif;
     color: black;
     background-size: 90vw auto;
 }
 
 #player-score-split {
-    font-size: 30px;
+    font-size: 24px;
     font-family: 'Roboto', sans-serif;
     color: black;
     background-size: 90vw auto;
 }   
 
 #dealer-score {
-    font-size: 30px;
+    font-size: 24px;
     font-family: 'Roboto', sans-serif;
     color: white;
     background-size: 90vw auto;

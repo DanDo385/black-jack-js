@@ -53,8 +53,8 @@ function shuffleDeck() {
     for (let i = 0; i < deck.length; i++) {
         const j = Math.floor(Math.random() * deck.length);
         [deck[i], deck[j]] = [deck[j], deck[i]];
-        console.log(deck);
     }
+    console.log(deck);
 }
     
 function checkDeckShuffle() {
@@ -73,6 +73,8 @@ function attachEventListeners() {
     splitButton.addEventListener('click', split);
     hitSplitButton.addEventListener('click', hitSplit);
     standSplitButton.addEventListener('click', standSplit);
+    doubleSplitButton.addEventListener('click', doubleSplit);
+
 }
 
 // Function to get the value of a card
