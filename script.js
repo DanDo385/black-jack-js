@@ -359,10 +359,10 @@ function determineWinner() {
         hitButton.disabled = true;
         standButton.disabled = true;
         calcChipsAndWins();
-        if (isSplit = true) {
+        if (isSplit) {
             determineSplitWinner();
         }
-        if (isSplit = false) {
+        else {
             setStart();
         }
         messageElement.innerText = message;
