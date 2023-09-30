@@ -32,8 +32,6 @@ function setStart() {
     dealerHand = ["BACK"];
     playerHand = ["BACK"];
     checkDeckShuffle();
-    createDeck();
-    shuffleDeck();
     attachEventListeners();
     updateDealerCardImages();
     updatePlayerCardImages();
@@ -110,7 +108,6 @@ function deal() {
     hitButton.disabled = false;   // Enable the hit and stand buttons
     standButton.disabled = false; 
     doubleButton.disabled = false;
-    dealButton.disabled = true;
 
     updateDealerCardImages();
     updatePlayerCardImages();
@@ -127,7 +124,6 @@ function deal() {
 
 
 function hit() {
-    isSplit = false;
     doubleButton.disabled = true;
     const card = deck.pop(); // Draw one card from the deck
     playerHand.push(card); // Add the card to the player's hand
@@ -145,7 +141,6 @@ function hit() {
 }
 
 function stand() {
-    isSplit = false;
     doubleButton.disabled = true;
     dealButton.disabled = false;
     while (dealerScore < 17) {
@@ -161,7 +156,6 @@ function stand() {
             determineWinner();
         }
     }
-   
 }
 
 function double() {
@@ -169,7 +163,6 @@ function double() {
     hit();
     stand();
 }
-
 
 function split() {
     messageSplitElement.innerText = 'We have a split hand!';
@@ -191,11 +184,10 @@ function hitSplit() {
     updatePlayerCardSplitImages();
     calcPlayerSplitScore();
     calcDealerScore();
-    // console.log(playerScoreSplit); 
     playerScoreSplitElement.innerText = playerScoreSplit;
     dealerScoreElement.innerText = dealerScore;
     if (playerScoreSplit >= 21) {
-        determineSplitWinner
+        determineSplitWinner();
     }
 }
 
@@ -210,9 +202,8 @@ function standSplit() {
         playerScoreSplitElement.innerText = playerScoreSplit;
         dealerScoreElement.innerText = dealerScore;
         if (dealerScore >= 21) {    
-            break;
+            determineSplitWinner();
         }
-    setTimeout(determineWinner, 900);   
     }
 }
 
@@ -358,14 +349,10 @@ function determineWinner() {
         
         hitButton.disabled = true;
         standButton.disabled = true;
+        splitButton.disabled = true;
         calcChipsAndWins();
-        if (isSplit) {
-            determineSplitWinner();
-        }
-        else {
-            setStart();
-        }
         messageElement.innerText = message;
+        
 }
 
 function determineSplitWinner() {
