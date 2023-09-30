@@ -3,10 +3,11 @@ body {
     text-align: center;
     background-color: teal;
     background-image: url(assets/images/boards/tealboard.png);
-    background-size: 90vw auto;     /* 75vw means 75% of the viewport width */
     background-repeat: no-repeat;   /* Prevent the image from repeating */
-    background-position: center center;  /* Center the image horizontally and vertically */
-    background-attachment: fixed;   /* This keeps the background fixed while scrolling */
+    background-position: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .row {
@@ -38,20 +39,51 @@ body {
     height: 201px;
 }
 
+#leftColumn {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: purple;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: yellow;
+    background-size: 90vw auto;
+
+}
 
 #message {
-    font-size: 20px;
+    font-size: 21px;
     font-family: 'Roboto', sans-serif;
-    color: white;
+    color: black;
     background-size: 90vw auto;
 }
 
 #message-split {
-    font-size: 20px;
+    font-size: 21px;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    background-size: 90vw auto;
+}
+
+#player-score {
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    background-size: 90vw auto;
+}
+
+#player-score-split {
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    background-size: 90vw auto;
+}   
+
+#dealer-score {
+    font-size: 30px;
     font-family: 'Roboto', sans-serif;
     color: white;
     background-size: 90vw auto;
-}
+}   
 
 #cheat-sheet {
     width: 402px;

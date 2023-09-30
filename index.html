@@ -18,43 +18,38 @@
        <div class="container">
             <div class="row">
                 <div class="col" id="leftColumn">
-                    <h3><input type="number" id="chip-wager" placeholder="Enter chip wager">100</h3>
+                    <h3>Enter Chip Wager:</h3>
+                    <h3><input type="number" id="chip-wager" placeholder=100></h3>
                     <h3>Chip Total: <span id="chip-total">1000</span></h3>
                     <h3>Dealer Wins: <span id="dealer-wins-count">0</span></h3>
                     <h3>Player Wins: <span id="player-wins-count">0</span></h3>
                 </div>
                 <div class="col-5" id="midColumn">
-                        <br>
                     <p id="message"></p>
                     <p id="message-split"></p>
                         <br>
-                    <div id="dealer-score">Dealer: </div>
-                    <div id="dealer-cards"><!-- Dealer cards --></div></h2>
+                    <h4><div id="dealer-score">Dealer Score: </div></h4>
+                    <h3><div id="dealer-cards"><!-- Dealer cards --></div></h3>
                         <br>
-                    <div id="players-area">
-                        <div class="player-info">
-                            <h2>Player:</h2>
-                            <div id="player-score">0</div>
-                        </div>
-                        <div id="player-cards"><!-- Player cards --></div>
-                        
-                        <span id="button-span-player">
-                            <button id="deal-button">DEAL</button>
-                            <button id="hit-button">HIT</button>
-                            <button id="stand-button">STAND</button>
-                            <button id="double-button">DuBLDoWN!</button>
-                            <button id="split-button">...Split?...</button>
-                            </span>
-                            <h2>Player Split:</h2>
-                            <div id="player-score-split">0</div>
-                            <div id="player-cards-split"><!-- Player Split cards --></div>
-                            <span id="button-span-player-split"></span>
-                                <button id="hit-split-button">HIT</button>
-                                <button id="stand-split-button">STAND</button> 
-                                <button id="double-split-button">DuBLDoWN!</button>
-                            </span>
-                        </div>
+                    <h4><div id="player-score">Player Score: </div></h4>
+                    <h3><div id="player-cards"><!-- Player cards --></div></h3>
+                        <br>
+                    <span id="button-span-player">
+                        <button id="deal-button">DEAL</button>
+                        <button id="hit-button">HIT</button>
+                        <button id="stand-button">STAND</button>
+                        <button id="double-button">DuBLDoWN!</button>
+                        <button id="split-button">...Split?...</button>
+                    </span>
+                    
+                    <h4><div id="player-score-split">Player Score Split: </div></h4>
+                    <h3><div id="player-cards-split"><!-- Dealer cards --></div></h3>
 
+                    <span id="button-span-player-split"></span>
+                        <button id="hit-split-button">HIT</button>
+                        <button id="stand-split-button">STAND</button> 
+                        <button id="double-split-button">DuBLDoWN!</button>
+                    </span>
                 </div>
                 <div class="col" id="rightColumn">
                     <div id="deck-info">
@@ -65,12 +60,7 @@
                 </div>
             </div>
        </div>
-        
-        <a href="https://www.etsy.com/listing/1469969304/blackjack-strategy-card-sheet-printable" 
-           target="_blank" rel="noopener noreferrer" alt="cheat-link">
-           <h4>Click Here for a Cheat Sheet!</h4>
-        </a>
-
+    
         <script src="script.js"></script>
     </body>
 </html>

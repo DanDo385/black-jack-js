@@ -99,7 +99,7 @@ function deal() {
     playerScoreElement.innerText = 0;
     dealerScoreElement.innerText = 0;
     playerScoreSplitElement.innerText = 0;
-    messageSplitElement.innerText = 'Good luck!';   
+    messageSplitElement.innerText = '';   
     chipWager = parseInt(chipWagerElement.value) || 10;
     playerHand.push(deck.pop());
     dealerHand.push(deck.pop());   
@@ -125,6 +125,7 @@ function deal() {
 
 
 function hit() {
+    isSplit = false;
     doubleButton.disabled = true;
     const card = deck.pop(); // Draw one card from the deck
     playerHand.push(card); // Add the card to the player's hand
@@ -142,6 +143,7 @@ function hit() {
 }
 
 function stand() {
+    isSplit = false;
     doubleButton.disabled = true;
     dealButton.disabled = false;
     while (dealerScore < 17) {
@@ -165,7 +167,6 @@ function double() {
     hit();
     stand();
 }
-
 
 
 function split() {
