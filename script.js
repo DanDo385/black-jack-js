@@ -109,6 +109,12 @@ function deal() {
     standButton.disabled = false; 
     doubleButton.disabled = false;
 
+    if (getValue(playerHand[0]) === getValue(playerHand[1])) {
+        splitButton.disabled = false;
+    }
+    else {
+        splitButton.disabled = true;
+    }
     updateDealerCardImages();
     updatePlayerCardImages();
     calcPlayerScore();
@@ -130,8 +136,7 @@ function hit() {
     updatePlayerCardImages();
     calcPlayerScore();
     calcDealerScore();
-    //console.log(playerScore); <-- used for testing
-    
+   
     // Check if player's score is greater than or equal to 21 after hitting
     if (playerScore >= 21) {
         determineWinner();
@@ -156,6 +161,7 @@ function stand() {
             determineWinner();
         }
     }
+    
 }
 
 function double() {
@@ -312,9 +318,7 @@ function calcPlayerSplitScore() {
 
 // function to determine winner of the game
 function determineWinner() {
-    if (gameOver) {
-        return; //Return to the hand if no winner found to keep playing
-    }
+    if (gameOver === false) {
         // Determine the winner for the main hand
         if (playerScore === 21) {
             result = 1;
@@ -347,12 +351,14 @@ function determineWinner() {
             gameOver = true;
         }
         
+        
+        messageElement.innerText = message;
         hitButton.disabled = true;
         standButton.disabled = true;
-        splitButton.disabled = true;
-        calcChipsAndWins();
-        messageElement.innerText = message;
-        
+        doubleButton.disabled = true;
+        splitButton.disabled = true; 
+        calcChipsAndWins();   
+    }
 }
 
 function determineSplitWinner() {
