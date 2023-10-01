@@ -89,6 +89,7 @@ function getValue(card) {
 
 // create function to deal initial hand
 function deal() {
+    messageElement.innerText = "Good luck!"
     gameOver = false; // Set gameOver to false to start a new game
     
     // Draw two cards for the player and one card for the dealer
@@ -143,19 +144,20 @@ function hit() {
 }
 
 function stand() {
-        while (dealerScore < 17) {
+    doubleButton.disabled = true;
+    while (dealerScore < 17) {
         const card = deck.pop();
         dealerHand.push(card);
         calcDealerScore();
-        calcPlayerScore();
         updateDealerCardImages();
-        }
-        // Check if dealer's score is greater than or equal to 21
         if (dealerScore >= 21) {
             determineWinner();
         }
-        playerScoreElement.innerText = playerScore;
-        dealerScoreElement.innerText = dealerScore;
+    }    
+    
+    playerScoreElement.innerText = playerScore;
+    dealerScoreElement.innerText = dealerScore;
+    messageElement.innerText = message;
 }
 
 function double() {
@@ -169,12 +171,14 @@ function split() {
     isSplit = true;
     if (getValue(playerHand[0]) === getValue(playerHand[1])) {
         playerHandSplit.push(playerHand.pop());
-        updatePlayerCardImages();
-        updatePlayerCardSplitImages();
-        calcPlayerScore();
-        calcPlayerSplitScore();
-        splitButton.disabled = true;
     }
+    updatePlayerCardImages();
+    updatePlayerCardSplitImages();
+    calcDealerScore();
+    calcPlayerScore();
+    calcPlayerSplitScore();
+    splitButton.disabled = true;
+    
 }
 
 function hitSplit() {
