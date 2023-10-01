@@ -37,7 +37,7 @@ function setStart() {
     updatePlayerCardImages();
     messageElement.innerText = "Good luck!";
     messageSplitElement.innerText = "";
-    [hitButton, standButton, doubleButton, splitButton, hitSplitButton, standSplitButton, doubleSplitButton].forEach(btn => btn.disabled = true);
+    [hitButton, standButton, doubleButton, splitButton, hitSplitButton, standSplitButton, doubleSplitButton].forEach(btn => btn.disabled = false);
 }
 
 function createDeck() {
@@ -95,7 +95,6 @@ function deal() {
     dealerHand = []; // Empty the board with the back of the cards and empty array so after deal, only 
     playerHand = []; // show the cards dealt to the dealer and player
                      
-    
     playerScoreElement.innerText = 0;
     dealerScoreElement.innerText = 0;
     playerScoreSplitElement.innerText = 0;
@@ -135,7 +134,7 @@ function hit() {
     playerHand.push(card); // Add the card to the player's hand
     updatePlayerCardImages();
     calcPlayerScore();
-    calcDealerScore();
+    
    
     // Check if player's score is greater than or equal to 21 after hitting
     if (playerScore >= 21) {
@@ -198,7 +197,7 @@ function hitSplit() {
 }
 
 function standSplit() {
-    doubleButton.disabled = true;   
+    doubleSplitButton.disabled = true;   
     while (dealerScore < 17) {
         const card = deck.pop();
         dealerHand.push(card);
