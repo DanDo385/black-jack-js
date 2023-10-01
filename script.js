@@ -89,7 +89,8 @@ function getValue(card) {
 
 // create function to deal initial hand
 function deal() {
-    
+    updatePlayerCardSplitImages();
+
     messageElement.innerText = "Good luck!"
     gameOver = false; // Set gameOver to false to start a new game
     
