@@ -89,6 +89,7 @@ function getValue(card) {
 
 // create function to deal initial hand
 function deal() {
+    
     messageElement.innerText = "Good luck!"
     gameOver = false; // Set gameOver to false to start a new game
     
@@ -157,6 +158,7 @@ function stand() {
     
     playerScoreElement.innerText = playerScore;
     dealerScoreElement.innerText = dealerScore;
+    determineWinner();
     messageElement.innerText = message;
 }
 
@@ -172,13 +174,17 @@ function split() {
     if (getValue(playerHand[0]) === getValue(playerHand[1])) {
         playerHandSplit.push(playerHand.pop());
     }
+    
+    splitButton.disabled = true;
+    
+    playerHand.push(deck.pop());
+    playerHandSplit.push(deck.pop());
+    
     updatePlayerCardImages();
     updatePlayerCardSplitImages();
     calcDealerScore();
     calcPlayerScore();
     calcPlayerSplitScore();
-    splitButton.disabled = true;
-    
 }
 
 function hitSplit() {
@@ -209,6 +215,7 @@ function standSplit() {
             determineSplitWinner();
         }
     }
+    determineSplitWinner();
 }
 
 function doubleSplit() {
@@ -351,7 +358,7 @@ function determineWinner() {
         
         
         messageElement.innerText = message;
-        hitButton.disabled = true;
+        [hitButton,standButton,doubleButton,splitButton].forEach(btn => btn.disabled = true);
         standButton.disabled = true;
         doubleButton.disabled = true;
         splitButton.disabled = true; 
@@ -409,6 +416,7 @@ function calcChipsAndWins() {
         document.getElementById('chip-total').innerText = chipCount;
         document.getElementById('dealer-wins-count').innerText = dealerWins;
     }
+        [hitButton,standButton,doubleButton,splitButton].forEach(btn => btn.disabled = true);
 }
 
 
