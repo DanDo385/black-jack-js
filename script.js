@@ -122,7 +122,6 @@ function deal() {
     if (playerScore >= 21) {   
         determineWinner();
     }   
-    
     playerScoreElement.innerText = playerScore;
     dealerScoreElement.innerText = dealerScore;
 }
@@ -135,7 +134,6 @@ function hit() {
     updatePlayerCardImages();
     calcPlayerScore();
     
-   
     // Check if player's score is greater than or equal to 21 after hitting
     if (playerScore >= 21) {
         determineWinner();
@@ -145,22 +143,19 @@ function hit() {
 }
 
 function stand() {
-    doubleButton.disabled = true;
-    dealButton.disabled = false;
-    while (dealerScore < 17) {
+        while (dealerScore < 17) {
         const card = deck.pop();
         dealerHand.push(card);
         calcDealerScore();
         calcPlayerScore();
         updateDealerCardImages();
-        playerScoreElement.innerText = playerScore;
-        dealerScoreElement.innerText = dealerScore;
+        }
         // Check if dealer's score is greater than or equal to 21
         if (dealerScore >= 21) {
             determineWinner();
         }
-    }
-    
+        playerScoreElement.innerText = playerScore;
+        dealerScoreElement.innerText = dealerScore;
 }
 
 function double() {
